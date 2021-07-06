@@ -1,0 +1,36 @@
+[user]
+	email = bjaskulski@protonmail.com
+	name = Bart Jaskulski
+	signingkey = 845132DFBE314ACF
+[core]
+	editor = vim
+	excludesFile = ~/.gitignore
+	autocrlf = input
+[commit]
+	gpgsign = true
+[color]
+	# Use colors in Git commands that are capable of colored output when
+	# outputting to the terminal. (This is the default setting in Git ≥ 1.8.4.)
+	ui = auto
+[color "branch"]
+	current = yellow reverse
+	local = yellow
+	remote = green
+[color "diff"]
+	meta = yellow bold
+	frag = magenta bold # line info
+	old = red # deletions
+	new = green # additions
+[color "status"]
+	added = yellow
+	changed = green
+	untracked = cyan
+[help]
+	# Automatically correct and execute mistyped commands.
+	autocorrect = 1
+[init]
+	defaultBranch = main
+[includeIf "gitdir:~/Developement/WPDesk/"]
+	path = ~/Developement/WPDesk/.gitconfig
+[pull]
+	rebase = true

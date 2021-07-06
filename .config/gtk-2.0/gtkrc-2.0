@@ -1,0 +1,7 @@
+gtk-theme-name="death-stranding"
+gtk-font-name="iAWriterMonoS 12"
+gtk-cursor-theme-name="xcursor-breeze"
+gtk-xft-antialias=1
+gtk-xft-hinting=1
+gtk-xft-hintstyle="hintfull"
+gtk-xft-rgba="rgb"

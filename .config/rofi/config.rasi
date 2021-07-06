@@ -1,0 +1,47 @@
+configuration {
+	lines: 1;
+	columns: 1;
+	bw: 1;
+	font: "monospace 28";
+	fixed-num-lines: true;
+	show-icons: true;
+	terminal: "alacritty";
+	run-shell-command: "{terminal} -e {cmd}";
+/*	window-command: "wmctrl -i -R {window}";*/
+/*	window-match-fields: "all";*/
+	icon-theme: "Papirus-Dark";
+/*	drun-match-fields: "name,generic,exec,categories,keywords";*/
+/*	drun-categories: ;*/
+/*	drun-show-actions: false;*/
+/*	drun-display-format: "{name} [<span weight='light' size='small'><i>({generic})</i></span>]";*/
+	disable-history: true;
+/*	ignored-prefixes: "";*/
+	sort: true;
+/*	sorting-method: "normal";*/
+	case-sensitive: false;
+	cycle: false;
+	sidebar-mode: false;
+/*	eh: 1;*/
+/*	auto-select: false;*/
+/*	parse-hosts: false;*/
+/*	parse-known-hosts: true;*/
+/*	combi-modi: "window,run";*/
+/*	matching: "normal";*/
+/*	tokenize: true;*/
+/*	m: "-5";*/
+/*	line-margin: 2;*/
+/*	line-padding: 1;*/
+/*	filter: ;*/
+	separator-style: "solid";
+	hide-scrollbar: true;
+	fullscreen: false;
+	fake-transparency: false;
+/*	dpi: -1;*/
+	threads: 1;
+/*	scrollbar-width: 8;*/
+/*	scroll-method: 0;*/
+/*	fake-background: "screenshot";*/
+/*	window-format: "{w}    {c}   {t}";*/
+/*	show-match: true;*/
+	theme: "stranding";
+}

@@ -1,0 +1,113 @@
+// vim:ts=4:sw=4:et
+{
+    "border": "pixel",
+    "current_border_width": 3,
+    "floating": "auto_off",
+    "geometry": {
+       "height": 993,
+       "width": 932,
+       "x": 11,
+       "y": 46
+    },
+    "marks": [],
+    "name": "Run - shopmagic-abandoned-carts",
+    "percent": 0.5,
+    "swallows": [
+       {
+        "class": "^jetbrains\\-phpstorm$",
+        "instance": "^jetbrains\\-phpstorm$",
+        "title": "^Run"
+       }
+    ],
+    "type": "con"
+}
+
+{
+    // splitv split container with 2 children
+    "border": "pixel",
+    "floating": "auto_off",
+    "layout": "splitv",
+    "marks": [],
+    "percent": 0.5,
+    "type": "con",
+    "nodes": [
+        {
+            "border": "pixel",
+            "current_border_width": 3,
+            "floating": "auto_off",
+            "geometry": {
+               "height": 1028,
+               "width": 456,
+               "x": 2887,
+               "y": 11
+            },
+            "marks": [],
+            "name": "Version Control - shopmagic-abandoned-carts",
+            "percent": 0.4,
+            "swallows": [
+               {
+                "class": "^jetbrains\\-phpstorm$",
+                "instance": "^jetbrains\\-phpstorm$",
+                "title": "^Version"
+               }
+            ],
+            "type": "con"
+        },
+        {
+            // splith split container with 2 children
+            "border": "pixel",
+            "floating": "auto_off",
+            "layout": "splith",
+            "marks": [],
+            "percent": 0.6,
+            "type": "con",
+            "nodes": [
+                {
+                    "border": "pixel",
+                    "current_border_width": 3,
+                    "floating": "auto_off",
+                    "geometry": {
+                       "height": 1028,
+                       "width": 452,
+                       "x": 3367,
+                       "y": 11
+                    },
+                    "marks": [],
+                    "name": "Terminal - shopmagic-abandoned-carts",
+                    "percent": 0.5,
+                    "swallows": [
+                       {
+                        "class": "^jetbrains\\-phpstorm$",
+                        "instance": "^jetbrains\\-phpstorm$",
+                        "title": "^Terminal"
+                       }
+                    ],
+                    "type": "con"
+                },
+                {
+                    "border": "pixel",
+                    "current_border_width": 3,
+                    "floating": "auto_off",
+                    "geometry": {
+                       "height": 708,
+                       "width": 67,
+                       "x": 2019,
+                       "y": 11
+                    },
+                    "marks": [],
+                    "name": "Commit - shopmagic-abandoned-carts",
+                    "percent": 0.5,
+                    "swallows": [
+                       {
+                        "class": "^jetbrains\\-phpstorm$",
+                        "instance": "^jetbrains\\-phpstorm$",
+                        "title": "^Commit"
+                       }
+                    ],
+                    "type": "con"
+                }
+            ]
+        }
+    ]
+}
+
