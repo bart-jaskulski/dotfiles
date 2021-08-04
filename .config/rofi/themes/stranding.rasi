@@ -32,9 +32,9 @@
 
 window {
   transparency: "real";
-  background-color: #282c3488;
+  background-color: #282c34bb;
   fullscreen: false;
-  padding: 10;
+  padding: 15;
   width: 450;
   border-radius: 6;
 }
@@ -45,21 +45,11 @@ mainbox {
 
 inputbar {
   margin: 0px 0px 20px 0px;
-  children: [prompt, textbox-prompt-colon, entry, case-indicator];
-}
-
-prompt {
-  text-color: @yellow;
-}
-
-textbox-prompt-colon {
-  expand: false;
-  str: ":";
-  text-color: @text-alt;
+  children: [entry];
 }
 
 entry {
-  margin: 0px 10px;
+  margin: 5px 5px 0px 5px;
 }
 
 listview {
@@ -69,7 +59,7 @@ listview {
 }
 
 element {
-  padding: 5px;
+  padding: 7px;
   text-color: @text-alt;
   highlight: bold #5b6c2c; /* green */
   border-radius: 3px;

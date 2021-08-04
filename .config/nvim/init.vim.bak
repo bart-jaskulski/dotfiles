@@ -1,0 +1,141 @@
+set nocompatible
+" Colemak keyboard tweaks.
+" function! Colemak()
+"   nnoremap l u
+"
+"   " right hand nav
+"   nnoremap n j
+"   vnoremap n j
+"   nnoremap e k
+"   vnoremap e k
+"   nnoremap i l
+"   vnoremap i l
+"   nnoremap k n
+"   nnoremap K N
+"
+"   " m goes to insert mode, or with shift at beginning of line
+"   nnoremap m i
+"   nnoremap M I
+"
+"   " shift+i does nothing
+"   nnoremap I <nop>
+"
+"   " move around the word
+"   nnoremap f e
+"   nnoremap <c-t> <c-f>
+" endfunction
+"command Colemak call Colemak()
+
+" Store temporary files in .vim to keep the working directories clean.
+set directory=/home/bartj/.config/nvim/swap
+set undodir=/home/bartj/.config/nvim/undo
+set viminfofile=/home/bartj/.config/nvim/.viminfo
+
+" Enable persistent undo.
+set undofile
+
+set hlsearch
+set incsearch
+
+syntax on
+colorscheme onedark
+
+" Show line numbers as relative so relative navigation is easier. Show actual
+" line number for active line.
+set number
+set relativenumber
+
+set tabstop=4 softtabstop=4
+set shiftwidth=4
+set expandtab
+set smartindent
+set ignorecase
+set smartcase
+set autoindent
+
+set linebreak
+set showmatch
+set scrolloff=8
+set laststatus=2
+set noshowmode
+set cursorline
+
+" Show line and character number in lower right hand corner.
+set ruler
+let g:python3_host_prog='/usr/bin/python'
+let g:limelight_conceal_ctermfg='8'
+let g:lightline = {
+    \ 'colorscheme': 'onedark',
+    \ }
+let g:onedark_termcolors=16
+call plug#begin('~/.vim/plugged')
+Plug 'junegunn/goyo.vim'
+Plug 'junegunn/limelight.vim'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'preservim/nerdtree'
+Plug 'itchyny/lightline.vim'
+Plug 'tpope/vim-commentary'
+Plug 'amiorin/vim-project'
+Plug 'StanAngeloff/php.vim'
+Plug 'ncm2/ncm2'
+Plug 'roxma/nvim-yarp'
+Plug 'phpactor/phpactor', {'do': ':call phpactor#Update()', 'for': 'php'}
+Plug 'phpactor/ncm2-phpactor', {'for': 'php'}
+Plug 'editorconfig/editorconfig-vim'
+Plug 'alvan/vim-php-manual', {'for': 'php'}
+Plug 'neomake/neomake'
+Plug 'preservim/tagbar'
+Plug 'neovim/nvim-lspconfig'
+call plug#end()
+
+augroup ncm2
+  au!
+  autocmd BufEnter * call ncm2#enable_for_buffer()
+  au User Ncm2PopupOpen set completeopt=noinsert,menuone,noselect
+  au User Ncm2PopupClose set completeopt=menuone
+augroup END
+
+" parameter expansion for selected entry via Enter
+" inoremap <silent> <expr> <CR> (pumvisible() ? ncm2_ultisnips#expand_or("\<CR>", 'n') : "\<CR>")
+
+" cycle through completion entries with tab/shift+tab
+inoremap <expr> <TAB> pumvisible() ? "\<c-n>" : "\<TAB>"
+inoremap <expr> <s-tab> pumvisible() ? "\<c-p>" : "\<TAB>"
+
+nnoremap <C-s> :Goyo<CR>
+nnoremap <C-h> :noh<CR>
+
+let NERDTreeQuitOnOpen=1
+nnoremap <C-\> :NERDTreeToggle<CR>
+
+nnoremap gd :call phpactor#GotoDefinition()<CR>
+
+let mapleader = " "
+set timeoutlen "500"
+nnoremap <leader>a :Rg<space>
+nnoremap <leader>A :exec "Rg ".expand("<cword>")<CR>
+
+let g:php_manual_online_search_shortcut = '<leader>p'
+
+autocmd! VimEnter * command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg --column --smart-case --line-number --color=always --no-heading --fixed-strings --follow --glob "!.git/*" '.shellescape(<q-args>), 1,
+  \   <bang>0 ? fzf#vim#with_preview('up:60%')
+  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \   <bang>0)
+
+filetype on
+
+set completeopt=noinsert,menuone,noselect
+set wildmenu
+set wildmode=full
+set wildignore=*.docx,*.jpg,*.png,*.gif,*.pdf,*.pyc,*.exe,*.flv,*.img,*.xlsx
+
+set hidden
+set autoread
+set showcmd
+
+lua << EOF
+require 'lspconfig'.phpactor.setup{}
+EOF

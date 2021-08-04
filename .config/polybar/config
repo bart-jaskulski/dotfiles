@@ -45,9 +45,9 @@ offset-y = 8
 
 font-0 = "iAWriterMonoS:style=Regular:size=8;1"
 font-1 = "Font Awesome 5 Brands:pixelsize=11;2"
-font-2 = "Font Awesome 5 Free Regular:pixelsize=11;2"
-font-3 = "Font Awesome 5 Free Solid:pixelsize=11;2"
-font-4 = "iMWritingMonoS Nerd Font:style=Regular:size=8;1"
+font-2 = "Font Awesome 5 Free Solid:pixelsize=11;2"
+font-3 = "Font Awesome 5 Free Regular:pixelsize=11;2"
+font-4 = "iMWritingMonoS Nerd Font:style=Regular:size=11;1"
 
 background = ${colors.background} 
 foreground = ${colors.foreground}
@@ -90,51 +90,27 @@ format = <label-state>
 index-sort = true
 wrapping-scroll = false
 
-; Only show workspaces on the same output as the bar
-;pin-workspaces = true
-
 ; focused = Active workspace on focused monitor
-label-focused = %icon%
+label-focused = 
 label-focused-underline= ${colors.yellow}
 label-focused-foreground = ${colors.yellow}
-label-focused-padding = 2
+label-focused-padding = 1.7
 
 ; unfocused = Inactive workspace on any monitor
-label-unfocused = %icon%
-label-unfocused-padding = 2
+label-unfocused-font = 4
+label-unfocused = 
+label-unfocused-padding = 1.7
 
 ; visible = Active workspace on unfocused monitor
-label-visible = %icon%
-label-visible-background = ${self.label-focused-background}
+label-visible-font = 4
+label-visible = 
 label-visible-underline = ${self.label-focused-underline}
 label-visible-padding = ${self.label-focused-padding}
 
 ; urgent = Workspace with urgency hint set
-label-urgent = %icon%
+label-urgent = 
 label-urgent-underline = ${colors.red}
-label-urgent-padding = 2
-
-; Separator in between workspaces
-ws-icon-0 = 1:web;
-ws-icon-1 = 2:media;
-ws-icon-2 = 3:games;
-ws-icon-3 = 4:games;
-ws-icon-4 = 5:code;
-ws-icon-5 = 6:term;
-ws-icon-default = 
-
-[module/xbacklight]
-type = internal/xbacklight
-
-format = <label> <bar>
-label = BL
-
-[module/backlight]
-;inherit = module/xbacklight
-type = internal/backlight
-card = intel_backlight
-format = <ramp> <bar>
-label = %percentage%
+label-urgent-padding = 1.7
 
 [module/wifi]
 type = internal/network
@@ -142,18 +118,10 @@ interface = wlp3s0
 interval = 3.0
 
 format-connected = <label-connected>
-label-connected = %essid%: %signal%
+label-connected =  %essid%
 
 format-disconnected = <label-disconnected>
 label-disconnected = %ifname% disconnected
-;label-disconnected-foreground = ${colors.foreground-alt}
-
-ramp-signal-0 =
-ramp-signal-1 =
-ramp-signal-2 =
-ramp-signal-3 =
-ramp-signal-4 =
-ramp-signal-foreground = ${colors.foreground}
 
 [module/date]
 type = custom/script
@@ -194,25 +162,6 @@ ramp-capacity-2 = 
 ramp-capacity-3 = 
 ramp-capacity-4 = 
 ramp-capacity-foreground = ${colors.foreground}
-
-[module/temperature]
-type = internal/temperature
-thermal-zone = 0
-warn-temperature = 60
-
-format = <ramp> <label>
-format-underline = #f50a4d
-format-warn = <ramp> <label-warn>
-format-warn-underline = ${self.format-underline}
-
-label = %temperature-c%
-label-warn = %temperature-c%
-label-warn-foreground = ${colors.secondary}
-
-ramp-0 = 
-ramp-1 = 
-ramp-2 = 
-ramp-foreground = ${colors.foreground-alt}
 
 [settings]
 screenchange-reload = true

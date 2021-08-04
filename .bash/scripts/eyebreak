@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+set -e
+
+notify-send "Take a break!"

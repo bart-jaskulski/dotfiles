@@ -27,6 +27,9 @@ exec --no-startup-id picom -b --experimental-backends
 
 # Launch polybar
 exec --no-startup-id $HOME/.config/polybar/launch.sh
+
+# Launch firefox on startup
+exec /usr/bin/firefox-developer-edition
 # }}}
 
 # {{{ Audio controls
@@ -35,6 +38,13 @@ bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% 
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle 
+
+bindsym XF86MonBrightnessUp exec --no-startup-id sudo ~/.bash/scripts/bright up
+bindsym XF86MonBrightnessDown exec --no-startup-id sudo ~/.bash/scripts/bright down
+
+bindsym XF86AudioPlay exec --no-startup-id mpc toggle
+bindsym XF86AudioPrev exec --no-startup-id mpc prev && $HOME/.bash/scripts/currentSong
+bindsym XF86AudioNext exec --no-startup-id mpc next && $HOME/.bash/scripts/currentSong
 # }}}
 
 # Add the wallpaper!
@@ -66,14 +76,14 @@ bindsym $mod+Period exec --no-startup-id ranger
 # dmenu replacement
 bindsym $mod+d exec rofi -modi drun -show drun
 # pass rofi implementation
-bindsym $mod+p exec rofi-pass
+bindsym $mod+p exec rofi-pass --last-used
 # calculations in rofi
 bindsym $mod+c exec rofi -modi calc -show calc
 # toggle redshift when needed
-bindsym $mod+o exec pkill redshift
-bindsym $mod+Shift+o exec redshift
+bindsym $mod+e exec pkill redshift
+bindsym $mod+Shift+e exec redshift
 # take some screenshots
-bindsym --release Print exec --no-startup-id import ~/Pictures/screenshots/screen-$(date --iso-8601=seconds).jpg -strip
+bindsym --release Print exec --no-startup-id ~/bin/screen.sh
 # }}}
 
 # {{{ Navigation
@@ -105,10 +115,10 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
-# bindsym $mod+h split h
+bindsym $mod+o split h
 
 # split in vertical orientation
-# bindsym $mod+v split v
+bindsym $mod+v split v
 
 # toggle fullscreen on current window
 bindsym $mod+f fullscreen toggle
@@ -141,12 +151,12 @@ bindsym $mod+minus scratchpad show
 # {{{ Workspaces
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
-set $ws1 1:web
-set $ws2 2:media
-set $ws3 3:vim
-set $ws4 4:games
-set $ws5 5:code
-set $ws6 6:term
+set $ws1 1
+set $ws2 2
+set $ws3 3
+set $ws4 4
+set $ws5 5
+set $ws6 6
 set $ws7 7
 set $ws8 8
 set $ws9 9
@@ -162,8 +172,10 @@ workspace $ws5 output $scr2 $scr1
 workspace $ws6 output $scr1
 
 assign [Class="firefoxdeveloperedition"] $ws1
-assign [Class="vlc"] $ws2
+assign [Class="vlc"] $ws3
+assign [Class="zoom"] $ws2
 assign [Class="Steam"] $ws4
+assign [Class="libreoffice*"] $ws7
 
 # switch to workspace
 bindsym $mod+1 workspace number $ws1
@@ -197,21 +209,10 @@ bindsym $mod+Shift+r restart
 # resize window (you can also use the mouse for that)
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
-
-        # Pressing left will shrink the window’s width.
-        # Pressing right will grow the window’s width.
-        # Pressing up will shrink the window’s height.
-        # Pressing down will grow the window’s height.
-        bindsym $left       resize shrink width 10 px or 10 ppt
-        bindsym $down       resize grow height 10 px or 10 ppt
-        bindsym $up         resize shrink height 10 px or 10 ppt
-        bindsym $right      resize grow width 10 px or 10 ppt
-
-        # same bindings, but for the arrow keys
-        bindsym Left        resize shrink width 10 px or 10 ppt
-        bindsym Down        resize grow height 10 px or 10 ppt
-        bindsym Up          resize shrink height 10 px or 10 ppt
-        bindsym Right       resize grow width 10 px or 10 ppt
+        bindsym $right      resize shrink width 5 px or 5 ppt
+        bindsym $up         resize grow height 5 px or 5 ppt
+        bindsym $down       resize shrink height 5 px or 5 ppt
+        bindsym $left       resize grow width 5 px or 5 ppt
 
         # back to normal: Enter or Escape or $mod+r
         bindsym Return mode "default"
@@ -295,3 +296,18 @@ client.placeholder	$foreground	$background	$foreground	$background		$background
 #############################
 gaps inner 18 
 gaps top 32
+
+mode "gaps" {
+        # These bindings trigger as soon as you enter the resize mode
+        bindsym $right      gaps outer current plus 5
+        bindsym $up         gaps inner current plus 5
+	bindsym $down       gaps inner current minus 5
+        bindsym $left       gaps outer current minus 5
+
+        # back to normal: Enter or Escape or $mod+r
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym $mod+g mode "default"
+}
+
+bindsym $mod+g mode "gaps"

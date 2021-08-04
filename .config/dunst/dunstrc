@@ -134,7 +134,7 @@
 
     # Vertical alignment of message text and icon.
     # Possible values are "top", "center" and "bottom".
-    vertical_alignment = center
+    vertical_alignment = top
 
     # Show age of message if message is older than show_age_threshold
     # seconds.
@@ -164,7 +164,7 @@
     ### Icons ###
 
     # Align icons left/right/off
-    icon_position = off
+    icon_position = left
 
     # Scale small icons up to this size, set to 0 to disable. Helpful
     # for e.g. small files or high-dpi screens. In case of conflict,
@@ -172,7 +172,7 @@
     min_icon_size = 0
 
     # Scale larger icons down to this size, set to 0 to disable
-    max_icon_size = 32
+    max_icon_size = 64
 
     # Paths to default icons.
     icon_path = /usr/share/icons/gnome/16x16/status/:/usr/share/icons/gnome/16x16/devices/

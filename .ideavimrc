@@ -1,24 +1,48 @@
-"" Source your .vimrc
-source ~/.vimrc
+" Enable persistent undo.
+set undofile
 
-"" -- Suggested options --
+set hlsearch
+set incsearch
+" Show line numbers as relative so relative navigation is easier. Show actual
+" line number for active line.
+set number
+set relativenumber
 
-" Do incremental searching.
-" set incsearch
+set tabstop=4 softtabstop=4
+set shiftwidth=4
+set expandtab
+set smartindent
+set ignorecase
+set smartcase
+set autoindent
+
+set linebreak
+set showmatch
+set scrolloff=8
+set noshowmode
+set cursorline
+set ruler
+
+let mapleader = " "
+set timeoutlen "500"
+
 set ideajoin
-" Don't use Ex mode, use Q for formatting.
-" map Q gq
+set ideastatusicon='disabled'
 
+set NERDTree
+set surround
+set commentary
+set highlightedyank
 
-"" -- Map IDE actions to IdeaVim -- https://jb.gg/abva4t
-"" Map \r to the Reformat Code action
-"map \r <Action>(ReformatCode)
+map <C-\> :NERDTreeFocus<CR>
+map <leader>sd <Action>(FindInPath)
+map <leader>ff <Action>(GotoFile)
+" map <leader><space> <Action>(Switcher)
 
-"" Map <leader>d to start debug
-"map <leader>d <Action>(Debug)
+map <C-h> :noh<CR>
 
-"" Map \b to toggle the breakpoint on the current line
-"map \b <Action>(ToggleLineBreakpoint)
+"" Y yank until the end of line
+map Y y$
 
-
-" Find more examples here: https://jb.gg/share-ideavimrc
+map <leader>y "+y
+map <leader>Y gg"+yG

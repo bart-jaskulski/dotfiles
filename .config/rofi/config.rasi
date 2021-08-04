@@ -4,7 +4,7 @@ configuration {
 	bw: 1;
 	font: "monospace 28";
 	fixed-num-lines: true;
-	show-icons: true;
+/*	show-icons: true; */
 	terminal: "alacritty";
 	run-shell-command: "{terminal} -e {cmd}";
 /*	window-command: "wmctrl -i -R {window}";*/
