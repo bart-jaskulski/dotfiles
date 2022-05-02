@@ -13,6 +13,7 @@ set ruler
 set showmode
 
 set tabstop=2
+set softtabstop=2
 
 let mapleader = " "
 

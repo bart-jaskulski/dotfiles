@@ -1,13 +1,7 @@
 #!/bin/bash
 
-if [[ "$(xdotool getwindowfocus getwindowname)" = "yad-calendar"
-]]; then
-				killall -q yad
-else
-
 yad --calendar \
 		--undecorated --fixed --close-on-unfocus \
 		--posy=38 --posx=815 --no-buttons --borders=0 \
 		--title="yad-calendar" \
-		> /dev/null && disown
-fi;
+		&> /dev/null && disown
