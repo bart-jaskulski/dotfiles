@@ -16,7 +16,7 @@ exec --no-startup-id dunst
 exec --no-startup-id picom -b --experimental-backends
 
 # Launch polybar
-exec --no-startup-id $HOME/.config/polybar/launch.sh
+exec --no-startup-id "$HOME/Scripts/bar"
 
 # Launch firefox on startup
 exec /usr/bin/firefox-developer-edition
