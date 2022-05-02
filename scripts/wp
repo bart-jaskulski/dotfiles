@@ -1,0 +1,14 @@
+#!/bin/bash
+
+wp() {
+	case $1 in
+	"up")
+		docker-compose -f ~/Developement/WPDesk/docker-local-env/docker-compose.yml up -d
+		;;
+	"down")
+		docker-compose -f ~/Developement/WPDesk/docker-local-env/docker-compose.yml down
+		;;
+	esac;
+}
+
+wp "$@"

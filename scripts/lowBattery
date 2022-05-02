@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 POWERSUPPLY="/sys/class/power_supply/AC/online" # could be different on your system!
 TOO_LOW=10 # how low is too low?

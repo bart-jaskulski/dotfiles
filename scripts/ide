@@ -1,0 +1,7 @@
+#!/bin/bash
+
+i3-msg "workspace 3; append_layout ~/.config/i3/workspace-term.json"
+i3-msg "workspace 2; append_layout ~/.config/i3/workspace-dev.json"
+
+~/bin/PhpStorm/bin/phpstorm.sh
+

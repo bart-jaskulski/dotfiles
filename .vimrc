@@ -1,76 +1,82 @@
-" Colemak keyboard tweaks.
-" function! Colemak()
-"   nnoremap l u
-"
-"   " right hand nav
-"   nnoremap n j
-"   vnoremap n j
-"   nnoremap e k
-"   vnoremap e k
-"   nnoremap i l
-"   vnoremap i l
-"   nnoremap k n
-"   nnoremap K N
-"
-"   " m goes to insert mode, or with shift at beginning of line
-"   nnoremap m i
-"   nnoremap M I
-"
-"   " shift+i does nothing
-"   nnoremap I <nop>
-"
-"   " move around the word
-"   nnoremap f e
-"   nnoremap <c-t> <c-f>
-" endfunction
-"command Colemak call Colemak()
-
-" Store temporary files in .vim to keep the working directories clean.
-set directory=~/.vim/swap
-set undodir=~/.vim/undo
-
-" Enable persistent undo.
-set undofile
-
 set nocompatible
+
+set autoindent
+
+set autowrite
+
+set number
+set relativenumber
+
+set ruler
+
+" Show command and insert mode
+set showmode
+
+set tabstop=2
+
+let mapleader = " "
+
+set smartindent
+
+set smarttab
+
+set nobackup
+set noswapfile
+set nowritebackup
+
 set hlsearch
+set incsearch
+set linebreak
+set ignorecase smartcase
+
+set hidden
+set ttyfast
+
+filetype plugin on
+
+map Y y$
+
+set wildmenu
 
 syntax on
 colorscheme onedark
 
-" Show line numbers as relative so relative navigation is easier. Show actual
-" line number for active line.
-set number
-set relativenumber
-
-set tabstop=4 softtabstop=4
-set shiftwidth=4
-set expandtab
-set smartindent
-
-set linebreak
-set showmatch
 set scrolloff=8
+set shortmess=aIT
+set clipboard=unnamed
+set nocursorline
 
-" Show line and character number in lower right hand corner.
-set ruler
+set colorcolumn=80
+set ttimeout
+set ttimeoutlen=100
 
-set wildmenu
+set autoread
+set autowrite
 
-let g:limelight_conceal_ctermfg='8'
-call plug#begin('~/.vim/plugged')
-Plug 'junegunn/goyo.vim'
-Plug 'junegunn/limelight.vim'
-call plug#end()
+set background=dark
 
-autocmd! User GoyoEnter Limelight
-autocmd! User GoyoLeave Limelight!
+set rulerformat=%30(%=%#LineNr#%.50f\ [%{strlen(&ft)?&ft:'none'}]\ %l:%c\ %p%%%)
 
-nnoremap <C-s> :Goyo<CR>
+match IncSearch '\s\+$'
 
-filetype on
+set textwidth=72
+set hidden
 
+hi Normal ctermbg=NONE
 
-set wildmenu
-set wildmode=list:longest
-set wildignore=*.docx,*.jpg,*.png,*.gif,*.pdf,*.pyc,*.exe,*.flv,*.img,*.xlsx
+set mouse=a
+
+set display=lastline
+set sidescrolloff=5
+
+set complete-=1
+set omnifunc=syntaxcomplete#Complete
+
+set showtabline=2
+
+noremap <C-h> <C-w>h
+noremap <C-j> <C-w>j
+noremap <C-k> <C-w>k
+noremap <C-l> <C-w>l
+
+nnoremap <silent> <leader>x :q<CR>

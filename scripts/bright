@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 set -e
 
 # Question: Under what circumstances could there be two backlight listings?
@@ -46,11 +46,11 @@ else
 direction=$1
 
   # Calculate
-  step=$(( $max_brightness / 10 ))
-  if [ $direction == 'up' ]; then
-	  new_brightness=$(( $curr_brightness + $step ))
-  elif [ $direction == 'down' ]; then
-	  new_brightness=$(( $curr_brightness - $step ))
+  step=$(( "$max_brightness" / 10 ))
+  if [ "$direction" == 'up' ]; then
+	  new_brightness=$(( "$curr_brightness" + "$step" ))
+  elif [ "$direction" == 'down' ]; then
+	  new_brightness=$(( "$curr_brightness" - "$step" ))
   else
 	  echo 'Argument $1 must be either "up" or "down". Quitting.'
 	  exit 1

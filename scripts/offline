@@ -1,0 +1,15 @@
+#!/bin/bash
+
+function check_online() {
+  if ! ping -q -c 1 google.com &> /dev/null;
+  then
+    echo -e "\033[0;31mStill offline..."
+    check_online
+  else
+    echo -e "\033[0;32mSuccesfully connected!"
+    exit 0
+  fi
+}
+
+echo "Checking your connection..."
+check_online

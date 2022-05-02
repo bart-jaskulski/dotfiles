@@ -3,19 +3,9 @@
 font pango:iAWriterMonoS 8
 
 # {{{ Utils
-# The combination of xss-lock, nm-applet and pactl is a popular choice, so
-# they are included here as an example. Modify as you see fit.
-
-# xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
-# screen before suspend. Use loginctl lock-session to lock your screen.
-# exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
-
-# NetworkManager is the most popular way to manage wireless networks on Linux,
-# and nm-applet is a desktop environment-independent system tray GUI for it.
-# exec --no-startup-id nm-applet
-
 # Start redshift on login to take care of your poor eyes.
 exec --no-startup-id redshift
+exec --no-startup-id ~/Applications/BreakTimer_5b60694dc565e207d16ab21f9465fd9a.AppImage
 
 # Set autotiling like in bspwm
 exec_always --no-startup-id autotiling
@@ -34,17 +24,17 @@ exec /usr/bin/firefox-developer-edition
 
 # {{{ Audio controls
 # Use pactl to adjust volume in PulseAudio.
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% 
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% 
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10%
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10%
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
-bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle 
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle
 
-bindsym XF86MonBrightnessUp exec --no-startup-id sudo ~/.bash/scripts/bright up
-bindsym XF86MonBrightnessDown exec --no-startup-id sudo ~/.bash/scripts/bright down
+bindsym XF86MonBrightnessUp exec --no-startup-id sudo bright up
+bindsym XF86MonBrightnessDown exec --no-startup-id sudo bright down
 
 bindsym XF86AudioPlay exec --no-startup-id mpc toggle
-bindsym XF86AudioPrev exec --no-startup-id mpc prev && $HOME/.bash/scripts/currentSong
-bindsym XF86AudioNext exec --no-startup-id mpc next && $HOME/.bash/scripts/currentSong
+bindsym XF86AudioPrev exec --no-startup-id mpc prev && currentSong
+bindsym XF86AudioNext exec --no-startup-id mpc next && currentSong
 # }}}
 
 # Add the wallpaper!
@@ -57,7 +47,7 @@ set $mod Mod4
 # the arrows is not convenient
 set $up k
 set $down j
-set $left h 
+set $left h
 set $right l
 
 # use Mouse+$mod to drag floating windows to their wanted position
@@ -68,10 +58,18 @@ floating_modifier $mod
 bindsym $mod+Return exec i3-sensible-terminal
 
 # Some oftern used apps
-bindsym $mod+n exec firefox-developer-edition
+# bindsym $mod+n exec firefox-developer-edition
+
 # Launch PhpStorm with preconfigured layout
-bindsym $mod+m exec ~/.config/i3/load_layout.sh
-bindsym $mod+Period exec --no-startup-id ranger
+# bindsym $mod+m exec ~/.config/i3/load_layout.sh
+bindsym F4 workspace back_and_forth
+bindsym F3 workspace next
+
+# New keybindings with focus possibility
+bindsym F8 exec --no-startup-id i3-msg '[class="firefox"] focus' || firefox-developer-edition
+bindsym F9 exec --no-startup-id i3-msg \
+				'[title="^Project"] [class="^jetbrains\\-phpstorm$"] focus' || ~/Scripts/ide
+bindsym F10 exec --no-startup-id i3-msg '[class="^Alacritty$"] focus' || i3-sensible-terminal
 
 # dmenu replacement
 bindsym $mod+d exec rofi -modi drun -show drun
@@ -83,12 +81,13 @@ bindsym $mod+c exec rofi -modi calc -show calc
 bindsym $mod+e exec pkill redshift
 bindsym $mod+Shift+e exec redshift
 # take some screenshots
-bindsym --release Print exec --no-startup-id ~/bin/screen.sh
+bindsym --release Print exec --no-startup-id ~/Scripts/scrr
 # }}}
 
 # {{{ Navigation
 # kill focused window
-bindsym $mod+Shift+q kill
+# bindsym $mod+Shift+q kill
+bindsym F6 kill
 
 # change focus
 bindsym $mod+$left focus left
@@ -121,18 +120,12 @@ bindsym $mod+o split h
 bindsym $mod+v split v
 
 # toggle fullscreen on current window
-bindsym $mod+f fullscreen toggle
-
-# change container layout (stacked, tabbed, toggle split)
-# bindsym $mod+s layout stacking
-# bindsym $mod+w layout tabbed
-# bindsym $mod+e layout toggle split
-
-# toggle tiling / floating
-# bindsym $mod+Shift+space floating toggle
+bindsym F1 fullscreen toggle
 
 # change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
+
+for_window [class="Zoom Meeting"] floating enable
 
 # focus the parent container
 bindsym $mod+a focus parent
@@ -156,11 +149,6 @@ set $ws2 2
 set $ws3 3
 set $ws4 4
 set $ws5 5
-set $ws6 6
-set $ws7 7
-set $ws8 8
-set $ws9 9
-set $ws10 10
 
 # Define variables for outputs
 set $scr1 eDP-1
@@ -168,14 +156,8 @@ set $scr2 HDMI-1
 
 # Define workspaces and assign them to specific outputs
 workspace $ws1 output $scr1
-workspace $ws5 output $scr2 $scr1
-workspace $ws6 output $scr1
-
-assign [Class="firefoxdeveloperedition"] $ws1
-assign [Class="vlc"] $ws3
-assign [Class="zoom"] $ws2
-assign [Class="Steam"] $ws4
-assign [Class="libreoffice*"] $ws7
+workspace $ws2 output $scr2 $scr1
+workspace $ws3 output $scr1
 
 # switch to workspace
 bindsym $mod+1 workspace number $ws1
@@ -183,11 +165,6 @@ bindsym $mod+2 workspace number $ws2
 bindsym $mod+3 workspace number $ws3
 bindsym $mod+4 workspace number $ws4
 bindsym $mod+5 workspace number $ws5
-bindsym $mod+6 workspace number $ws6
-bindsym $mod+7 workspace number $ws7
-bindsym $mod+8 workspace number $ws8
-bindsym $mod+9 workspace number $ws9
-bindsym $mod+0 workspace number $ws10
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace number $ws1
@@ -195,11 +172,6 @@ bindsym $mod+Shift+2 move container to workspace number $ws2
 bindsym $mod+Shift+3 move container to workspace number $ws3
 bindsym $mod+Shift+4 move container to workspace number $ws4
 bindsym $mod+Shift+5 move container to workspace number $ws5
-bindsym $mod+Shift+6 move container to workspace number $ws6
-bindsym $mod+Shift+7 move container to workspace number $ws7
-bindsym $mod+Shift+8 move container to workspace number $ws8
-bindsym $mod+Shift+9 move container to workspace number $ws9
-bindsym $mod+Shift+0 move container to workspace number $ws10
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -224,10 +196,10 @@ bindsym $mod+r mode "resize"
 
 # move floating windows may be sometimes helpful when window overflows
 mode "move" {
-	bindsym $left	move left  10 px 
+	bindsym $left	move left  10 px
 	bindsym $right	move right 10 px
 	bindsym $up	move up    10 px
-	bindsym $down	move down  10 px 
+	bindsym $down	move down  10 px
 
         # back to normal: Enter or Escape or $mod+r
         bindsym Return mode "default"
@@ -238,7 +210,7 @@ mode "move" {
 bindsym $mod+i mode "move"
 
 # {{{ Session control
-set $Locker ~/bin/lock.sh
+set $Locker lock
 
 mode "System" {
     bindsym l exec --no-startup-id $Locker, mode "default"
@@ -246,7 +218,7 @@ mode "System" {
     bindsym s exec --no-startup-id $Locker && systemctl suspend, mode "default"
     bindsym h exec --no-startup-id $Locker && systemctl hibernate, mode "default"
     bindsym r exec --no-startup-id systemctl reboot, mode "default"
-    bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"  
+    bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"
 
     # back to normal: Enter or Escape
     bindsym Return mode "default"
@@ -259,7 +231,7 @@ bindsym $mod+q mode "System"
 
 default_border none
 hide_edge_borders both
- 
+
 # Colors set from ~/.Xresources
 set_from_resource	$background	background
 set_from_resource	$foreground	foreground
@@ -285,7 +257,7 @@ set_from_resource	$color15	color15
 # My colors
 client.background	$color0
 
-client.focused         	$color4		$background	$foreground	$background		$background	
+client.focused         	$color4		$background	$foreground	$background		$background
 client.unfocused       	$foreground	$background	$foreground	$background		$background
 client.focused_inactive	$foreground	$background	$foreground	$background		$background
 client.urgent		$foreground	$background	$foreground	$background		$background
@@ -294,7 +266,7 @@ client.placeholder	$foreground	$background	$foreground	$background		$background
 #############################
 ### settings for i3-gaps: ###
 #############################
-gaps inner 18 
+gaps inner 18
 gaps top 32
 
 mode "gaps" {
@@ -311,3 +283,4 @@ mode "gaps" {
 }
 
 bindsym $mod+g mode "gaps"
+
