@@ -1,0 +1,16 @@
+configuration {
+	font: "monospace 28";
+	fixed-num-lines: true;
+	terminal: "alacritty";
+	run-shell-command: "{terminal} -e {cmd}";
+	icon-theme: "Papirus-Dark";
+	disable-history: true;
+	sort: true;
+	case-sensitive: false;
+	cycle: false;
+	sidebar-mode: false;
+	threads: 1;
+}
+
+@theme "stranding"
+

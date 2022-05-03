@@ -9,7 +9,7 @@ ln -sf "$PWD/.gitconfig" "$HOME/.gitconfig"
 ln -sf "$PWD/.gitignore" "$HOME/.gitignore"
 # ln -sf "$PWD/.gitattributes" "$HOME/.gitattributes"
 
-for i in i3 polybar; do
+for i in i3 polybar picom dunst rofi alacritty; do
 	cd $i && ./setup
 	cd -
 done

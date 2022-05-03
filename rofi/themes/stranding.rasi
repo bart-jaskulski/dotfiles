@@ -1,0 +1,82 @@
+* {
+  black:      #000000;
+  red:        #aa442a;
+  green:      #5b6c2c;
+  yellow:     #b0852d;
+  blue:       #5270cf;
+  mangenta:   #f7f4eb;
+  cyan:       #5bb9fe;
+  emphasis:   #b0852c;
+  text:       #dfdfdf;
+  text-alt:   #b2b2b2;
+  fg:         #abb2bf;
+  bg:         #282c34;
+
+  spacing: 0;
+  background-color: transparent;
+
+  font: "iA Writer Mono S 11";
+  text-color: @text;
+}
+
+window {
+  transparency: "real";
+  background-color: #282c34bb;
+  fullscreen: false;
+  padding: 15;
+  width: 450;
+  border-radius: 6;
+}
+
+mainbox {
+  padding: 0 0;
+}
+
+inputbar {
+  margin: 0px 0px 20px 0px;
+  children: [entry];
+}
+
+entry {
+  margin: 5px 5px 0px 5px;
+}
+
+listview {
+  spacing: 5px;
+  dynamic: true;
+  scrollbar: false;
+}
+
+element {
+  padding: 7px;
+  text-color: @text-alt;
+  highlight: bold #5b6c2c; /* green */
+  border-radius: 3px;
+}
+
+element selected {
+  background-color: @emphasis;
+  text-color: @bg;
+}
+
+element urgent, element selected urgent {
+  text-color: @red;
+}
+
+element active, element selected active {
+  text-color: @purple;
+}
+
+message {
+  padding: 5px;
+  border-radius: 3px;
+  background-color: @emphasis;
+  border: 1px;
+  border-color: @cyan;
+}
+
+button selected {
+  padding: 5px;
+  border-radius: 3px;
+  background-color: @emphasis;
+}
