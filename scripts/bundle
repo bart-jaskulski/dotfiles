@@ -1,10 +1,6 @@
 #!/bin/bash
 
-if [[ -n $1 ]]; then
-				DIRNAME=$1
-else
-				DIRNAME=${PWD##*/}
-fi;
+DIRNAME=${1:-${PWD##*/}}
 
 composer -q install > /dev/null 2>&1
 composer -q install --no-dev
