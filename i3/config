@@ -1,29 +1,64 @@
 # i3 config file (v4)
-#
+
 font pango:iAWriterMonoS 8
 
-# {{{ Utils
-# Start redshift on login to take care of your poor eyes.
+#------------------ startup ---------------
 exec --no-startup-id redshift
 exec --no-startup-id ~/Applications/BreakTimer_5b60694dc565e207d16ab21f9465fd9a.AppImage
-
 # Set autotiling like in bspwm
 exec_always --no-startup-id autotiling
-
 exec --no-startup-id dunst
-
-# Compositioning
 exec --no-startup-id picom -b --experimental-backends
+exec --no-startup-id $HOME/Scripts/bar
+exec --no-startup-id /usr/bin/firefox-developer-edition
 
-# Launch polybar
-exec --no-startup-id $HOME/.config/polybar/launch.sh
+exec --no-startup-id feh --bg-fill /usr/share/backgrounds/wallpaper-6.png /usr/share/backgrounds/wallpaper-5.jpg
 
-# Launch firefox on startup
-exec /usr/bin/firefox-developer-edition
-# }}}
+#------------------------ keybindings ----------------------
+set $mod Mod4
 
-# {{{ Audio controls
-# Use pactl to adjust volume in PulseAudio.
+set $up k
+set $down j
+set $left h
+set $right l
+
+floating_modifier $mod
+
+bindsym F1 fullscreen toggle
+bindsym F4 workspace back_and_forth
+bindsym F3 workspace next
+bindsym F6 kill
+bindsym F8 exec --no-startup-id i3-msg '[class="firefox"] focus' \
+  || firefox-developer-edition
+bindsym F9 exec --no-startup-id i3-msg \
+	'[title="^Project"] [class="^jetbrains\\-phpstorm$"] focus' \
+	|| $HOME/Scripts/ide
+bindsym F10 exec --no-startup-id i3-msg '[class="^Alacritty$"] focus' \
+  || i3-sensible-terminal
+
+bindsym $mod+d exec --no-startup-id rofi -modi drun -show drun
+bindsym $mod+p exec --no-startup-id rofi-pass --last-used
+bindsym $mod+c exec --no-startup-id rofi -modi calc -show calc
+bindsym $mod+e exec --no-startup-id pkill redshift
+bindsym $mod+Shift+e exec --no-startup-id redshift
+bindsym --release Print exec --no-startup-id ~/Scripts/scrr
+
+# {{{ Navigation
+# change focus
+bindsym $mod+$left focus left
+bindsym $mod+$down focus down
+bindsym $mod+$up focus up
+bindsym $mod+$right focus right
+
+# move focused window
+bindsym $mod+Shift+$left move left
+bindsym $mod+Shift+$down move down
+bindsym $mod+Shift+$up move up
+bindsym $mod+Shift+$right move right
+
+bindsym $mod+o split h
+bindsym $mod+v split v
+
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10%
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10%
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
@@ -35,104 +70,7 @@ bindsym XF86MonBrightnessDown exec --no-startup-id sudo bright down
 bindsym XF86AudioPlay exec --no-startup-id mpc toggle
 bindsym XF86AudioPrev exec --no-startup-id mpc prev && currentSong
 bindsym XF86AudioNext exec --no-startup-id mpc next && currentSong
-# }}}
 
-# Add the wallpaper!
-exec --no-startup-id feh --bg-fill /usr/share/backgrounds/wallpaper-6.png /usr/share/backgrounds/wallpaper-5.jpg
-
-# Set global modifier
-set $mod Mod4
-
-# use these keys for focus, movement, and resize directions when reaching for
-# the arrows is not convenient
-set $up k
-set $down j
-set $left h
-set $right l
-
-# use Mouse+$mod to drag floating windows to their wanted position
-floating_modifier $mod
-
-# {{{ Apps launching
-# start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
-
-# Some oftern used apps
-# bindsym $mod+n exec firefox-developer-edition
-
-# Launch PhpStorm with preconfigured layout
-# bindsym $mod+m exec ~/.config/i3/load_layout.sh
-bindsym F4 workspace back_and_forth
-bindsym F3 workspace next
-
-# New keybindings with focus possibility
-bindsym F8 exec --no-startup-id i3-msg '[class="firefox"] focus' || firefox-developer-edition
-bindsym F9 exec --no-startup-id i3-msg \
-				'[title="^Project"] [class="^jetbrains\\-phpstorm$"] focus' || ~/Scripts/ide
-bindsym F10 exec --no-startup-id i3-msg '[class="^Alacritty$"] focus' || i3-sensible-terminal
-
-# dmenu replacement
-bindsym $mod+d exec rofi -modi drun -show drun
-# pass rofi implementation
-bindsym $mod+p exec rofi-pass --last-used
-# calculations in rofi
-bindsym $mod+c exec rofi -modi calc -show calc
-# toggle redshift when needed
-bindsym $mod+e exec pkill redshift
-bindsym $mod+Shift+e exec redshift
-# take some screenshots
-bindsym --release Print exec --no-startup-id ~/Scripts/scrr
-# }}}
-
-# {{{ Navigation
-# kill focused window
-# bindsym $mod+Shift+q kill
-bindsym F6 kill
-
-# change focus
-bindsym $mod+$left focus left
-bindsym $mod+$down focus down
-bindsym $mod+$up focus up
-bindsym $mod+$right focus right
-
-# alternatively, you can use the cursor keys:
-bindsym $mod+Left focus left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
-bindsym $mod+Right focus right
-
-# move focused window
-bindsym $mod+Shift+$left move left
-bindsym $mod+Shift+$down move down
-bindsym $mod+Shift+$up move up
-bindsym $mod+Shift+$right move right
-
-# alternatively, you can use the cursor keys:
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Up move up
-bindsym $mod+Shift+Right move right
-
-# split in horizontal orientation
-bindsym $mod+o split h
-
-# split in vertical orientation
-bindsym $mod+v split v
-
-# toggle fullscreen on current window
-bindsym F1 fullscreen toggle
-
-# change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
-
-for_window [class="Zoom Meeting"] floating enable
-
-# focus the parent container
-bindsym $mod+a focus parent
-
-# focus the child container
-#bindsym $mod+d focus child
-# }}}
 
 # move the currently focused window to the scratchpad
 bindsym $mod+Shift+minus move scratchpad
@@ -159,6 +97,8 @@ workspace $ws1 output $scr1
 workspace $ws2 output $scr2 $scr1
 workspace $ws3 output $scr1
 
+for_window [class="Zoom Meeting"] floating enable
+
 # switch to workspace
 bindsym $mod+1 workspace number $ws1
 bindsym $mod+2 workspace number $ws2
@@ -178,15 +118,12 @@ bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 
-# resize window (you can also use the mouse for that)
 mode "resize" {
-        # These bindings trigger as soon as you enter the resize mode
         bindsym $right      resize shrink width 5 px or 5 ppt
         bindsym $up         resize grow height 5 px or 5 ppt
         bindsym $down       resize shrink height 5 px or 5 ppt
         bindsym $left       resize grow width 5 px or 5 ppt
 
-        # back to normal: Enter or Escape or $mod+r
         bindsym Return mode "default"
         bindsym Escape mode "default"
         bindsym $mod+r mode "default"
@@ -201,33 +138,12 @@ mode "move" {
 	bindsym $up	move up    10 px
 	bindsym $down	move down  10 px
 
-        # back to normal: Enter or Escape or $mod+r
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-        bindsym $mod+m mode "default"
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+  bindsym $mod+m mode "default"
 }
 
 bindsym $mod+i mode "move"
-
-# {{{ Session control
-set $Locker lock
-
-mode "System" {
-    bindsym l exec --no-startup-id $Locker, mode "default"
-    bindsym e exec --no-startup-id i3-msg exit, mode "default"
-    bindsym s exec --no-startup-id $Locker && systemctl suspend, mode "default"
-    bindsym h exec --no-startup-id $Locker && systemctl hibernate, mode "default"
-    bindsym r exec --no-startup-id systemctl reboot, mode "default"
-    bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"
-
-    # back to normal: Enter or Escape
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
-}
-
-bindsym $mod+q mode "System"
-# }}}
-
 
 default_border none
 hide_edge_borders both
@@ -236,12 +152,12 @@ hide_edge_borders both
 set_from_resource	$background	background
 set_from_resource	$foreground	foreground
 set_from_resource	$color0		color0
-set_from_resource 	$color1 	color1
-set_from_resource 	$color2 	color2
-set_from_resource 	$color3 	color3
-set_from_resource 	$color4 	color4
-set_from_resource 	$color5 	color5
-set_from_resource 	$color6		color6
+set_from_resource $color1 	color1
+set_from_resource $color2 	color2
+set_from_resource $color3 	color3
+set_from_resource $color4 	color4
+set_from_resource $color5 	color5
+set_from_resource $color6		color6
 set_from_resource	$color7		color7
 set_from_resource	$color8		color8
 set_from_resource	$color9		color9
@@ -268,19 +184,3 @@ client.placeholder	$foreground	$background	$foreground	$background		$background
 #############################
 gaps inner 18
 gaps top 32
-
-mode "gaps" {
-        # These bindings trigger as soon as you enter the resize mode
-        bindsym $right      gaps outer current plus 5
-        bindsym $up         gaps inner current plus 5
-	bindsym $down       gaps inner current minus 5
-        bindsym $left       gaps outer current minus 5
-
-        # back to normal: Enter or Escape or $mod+r
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-        bindsym $mod+g mode "default"
-}
-
-bindsym $mod+g mode "gaps"
-
