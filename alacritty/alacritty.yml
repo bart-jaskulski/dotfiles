@@ -1,0 +1,59 @@
+window:
+  padding:
+    x: 12
+    y: 12
+  decorations: none
+  dynamic_title: false
+
+shell:
+    program: /usr/bin/bash
+    args:
+        - -c
+        - "tmux -u attach -t base || tmux -u new -s base"
+scrolling:
+  # Specifying '0' will disable scrolling.
+  # Rely on scrolling with tmux history.
+  history: 0
+
+font:
+  normal:
+    family: iMWritingMonoS Nerd Font
+    style: Regular
+  size: 11.5
+
+colors:
+  cursor:
+    text: CellBackground
+    cursor: CellForeground
+
+cursor:
+  style:
+    shape: Block
+    blinking: On
+  blink_interval: 750
+  unfocused_hollow: true
+  thickness: 0.15
+
+live_config_reload: true
+
+mouse:
+  double_click: { threshold: 300 }
+  triple_click: { threshold: 300 }
+
+  hide_when_typing: true
+
+#debug:
+  # Display the time it takes to redraw each frame.
+  render_timer: false
+  persistent_logging: false
+
+  # Log level
+  #
+  # Values for `log_level`:
+  #   - Off
+  #   - Error
+  #   - Warn
+  #   - Info
+  #   - Debug
+  #   - Trace
+  log_level: Error

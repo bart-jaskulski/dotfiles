@@ -5,6 +5,9 @@ ln -sf "$PWD/.bashrc" "$HOME/.bashrc"
 ln -sf "$PWD/.vimrc" "$HOME/.vimrc"
 ln -sf "$PWD/.tmux.conf" "$HOME/.tmux.conf"
 ln -sf "$PWD/scripts" "$HOME/Scripts"
+ln -sf "$PWD/.gitconfig" "$HOME/.gitconfig"
+ln -sf "$PWD/.gitignore" "$HOME/.gitignore"
+# ln -sf "$PWD/.gitattributes" "$HOME/.gitattributes"
 
 for i in i3 polybar; do
 	cd $i && ./setup
