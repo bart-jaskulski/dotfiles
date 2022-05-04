@@ -109,7 +109,7 @@ label-disconnected = %ifname% disconnected
 type = custom/script
 interval = 30
 exec = date +"%H:%M"
-click-left = popcal
+click-left = ~/Scripts/popcal
 
 [module/pulseaudio]
 type = internal/pulseaudio
