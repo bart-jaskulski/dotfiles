@@ -9,7 +9,7 @@ set number
 set relativenumber
 
 set tabstop=4 softtabstop=4
-set shiftwidth=4
+set shiftwidth=
 set expandtab
 set smartindent
 set ignorecase
@@ -23,7 +23,7 @@ set noshowmode
 set cursorline
 set ruler
 
-let mapleader = " "
+let mapleader=" "
 set timeoutlen "500"
 
 set ideajoin
