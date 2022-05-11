@@ -11,6 +11,7 @@ _have() { type "$1" &>/dev/null; }
 
 #------------- env ----------------
 
+export GPG_TTY=$(tty)
 export REPOS="$HOME/Repos"
 export CLICOLOR=1
 export LSCOLORS=ExFxBxDxCxegedabagacad
@@ -48,16 +49,13 @@ pathprepend() {
   done
 } && export pathprepend
 
-pathprepend \
-  "$HOME/Scripts"
+pathprepend "$HOME/Scripts"
 
-pathappend \
-  "$HOME/.config/composer/vendor/bin" \
-  "$HOME/bin"
+pathappend "$HOME/.config/composer/vendor/bin"
 
 #--------------- cdpath
 
-export CDPATH=".:$REPOS:~/Developement:~/Developement/WPDesk"
+export CDPATH=".:$REPOS:$REPOS/WPDesk"
 
 
 #---------------- shell options -----------------
@@ -134,6 +132,7 @@ alias chmox='chmod +x'
 alias k='clear'
 alias r=ranger
 alias vi=vim
+# TODO: move those aliases to git config, to free up bashrc
 alias ga='git add'
 alias gall='git add --all'
 alias gdf='git diff'
@@ -159,5 +158,3 @@ alias gstm='git stash push --message'
 alias gstpo='git stash pop'
 alias gstpu='git stash push'
 alias gstl='git stash list'
-
-eval "$(zoxide init bash)"
