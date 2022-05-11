@@ -4,15 +4,16 @@ font pango:iAWriterMonoS 8
 
 #------------------ startup ---------------
 exec --no-startup-id redshift
-exec --no-startup-id ~/Applications/BreakTimer_5b60694dc565e207d16ab21f9465fd9a.AppImage
+# exec --no-startup-id ~/Applications/BreakTimer_5b60694dc565e207d16ab21f9465fd9a.AppImage
 # Set autotiling like in bspwm
-exec_always --no-startup-id autotiling
+# exec_always --no-startup-id autotiling
 exec --no-startup-id dunst
 exec --no-startup-id picom -b --experimental-backends
 exec --no-startup-id $HOME/Scripts/bar
 exec --no-startup-id /usr/bin/firefox-developer-edition
 
-exec --no-startup-id feh --bg-fill /usr/share/backgrounds/wallpaper-6.png /usr/share/backgrounds/wallpaper-5.jpg
+exec --no-startup-id feh --bg-fill ~/Pictures/Wallpapers/wallpaper-6.png \
+  ~/Pictures/Wallpapers/wallpaper-5.jpg
 
 #------------------------ keybindings ----------------------
 set $mod Mod4
@@ -26,13 +27,15 @@ floating_modifier $mod
 
 bindsym F1 fullscreen toggle
 bindsym F4 workspace back_and_forth
-bindsym F3 workspace next
+bindsym F3 exec --no-startup-id i3-msg 'scratchpad show' && \
+  i3-msg 'floating toggle' || \
+	i3-msg 'move scratchpad'
 bindsym F6 kill
 bindsym F8 exec --no-startup-id i3-msg '[class="firefox"] focus' \
   || firefox-developer-edition
 bindsym F9 exec --no-startup-id i3-msg \
 	'[title="^Project"] [class="^jetbrains\\-phpstorm$"] focus' \
-	|| $HOME/Scripts/ide
+	|| "$HOME/Scripts/ide"
 bindsym F10 exec --no-startup-id i3-msg '[class="^Alacritty$"] focus' \
   || i3-sensible-terminal
 
@@ -98,6 +101,7 @@ workspace $ws2 output $scr2 $scr1
 workspace $ws3 output $scr1
 
 for_window [class="Zoom Meeting"] floating enable
+for_window [title="(?i)devtools|developer tools"] resize set width 25 ppt
 
 # switch to workspace
 bindsym $mod+1 workspace number $ws1
