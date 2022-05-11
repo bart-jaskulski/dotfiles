@@ -4,6 +4,7 @@ function check_online() {
   if ! ping -q -c 1 google.com &> /dev/null;
   then
     echo -e "\033[0;31mStill offline..."
+		sleep 3
     check_online
   else
     echo -e "\033[0;32mSuccesfully connected!"
