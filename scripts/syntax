@@ -1,0 +1,5 @@
+#!/bin/bash
+
+find "${1:-$PWD}" -name '*.php' -print0 | \
+  xargs -0 -I '{}' -P8 \
+	docker run --rm -v "$PWD":/opt php:7.0-cli -l '/opt/{}'
