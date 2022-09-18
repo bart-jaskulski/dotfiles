@@ -71,14 +71,6 @@ bindsym XF86AudioPlay exec --no-startup-id mpc toggle
 bindsym XF86AudioPrev exec --no-startup-id mpc prev && currentSong
 bindsym XF86AudioNext exec --no-startup-id mpc next && currentSong
 
-
-# move the currently focused window to the scratchpad
-bindsym $mod+Shift+minus move scratchpad
-
-# Show the next scratchpad window or hide the focused scratchpad window.
-# If there are multiple scratchpad windows, this command cycles through them.
-bindsym $mod+minus scratchpad show
-
 # {{{ Workspaces
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
@@ -97,7 +89,7 @@ workspace $ws1 output $scr1
 workspace $ws2 output $scr2 $scr1
 workspace $ws3 output $scr1
 
-for_window [title="(?i)zoom"] floating enable
+for_window [class="(?i)zoom meeting"] floating enable
 for_window [title="(?i)devtools|developer tools"] resize set width 25 ppt
 
 # switch to workspace
