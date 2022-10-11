@@ -8,6 +8,8 @@
 	autocrlf = input
 [commit]
 	gpgsign = true
+	template = ~/.gitmessage
+	verbose = true
 [color]
 	ui = auto
 [color "branch"]
@@ -27,7 +29,7 @@
 	autocorrect = 1
 [init]
 	defaultBranch = main
-[includeIf "gitdir:~/Developement/WPDesk/"]
-	path = ~/Developement/WPDesk/.gitconfig
+[includeIf "gitdir:~/Repos/WPDesk/"]
+	path = ~/Repos/WPDesk/.gitconfig
 [pull]
 	rebase = true

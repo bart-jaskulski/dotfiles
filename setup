@@ -6,6 +6,7 @@ ln -sf "$PWD/.tmux.conf" "$HOME/.tmux.conf"
 ln -sf "$PWD/scripts" "$HOME/Scripts"
 ln -sf "$PWD/.gitconfig" "$HOME/.gitconfig"
 ln -sf "$PWD/.gitignore" "$HOME/.gitignore"
+ln -sf "$PWD/.gitmessage" "$HOME/.gitmessage"
 # ln -sf "$PWD/.gitattributes" "$HOME/.gitattributes"
 
 for i in vim i3 polybar picom dunst rofi alacritty; do

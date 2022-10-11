@@ -5,10 +5,6 @@ case $- in
     *) return;;
 esac
 
-#------------ utils ----------------
-
-_have() { type "$1" &>/dev/null; }
-
 #------------- env ----------------
 
 export GPG_TTY=$(tty)
@@ -60,7 +56,6 @@ pathappend "$HOME/.config/composer/vendor/bin" \
 
 export CDPATH=".:$REPOS:$REPOS/WPDesk"
 
-
 #---------------- shell options -----------------
 
 shopt -s checkwinsize
@@ -86,7 +81,27 @@ shopt -s cmdhist
 # --------------------------- smart prompt ---------------------------
 #                 (keeping in bashrc for portability)
 
-PROMPT_AT=@
+__dirty_git() {
+  local SCM=0
+  if test -f .git/HEAD -o -n "$(git rev-parse --is-inside-work-tree 2> /dev/null)"
+	then
+	  SCM=1
+	fi
+	if test $SCM == 1; then
+	  local state, commit_count, m
+    state=$(git status --short 2>/dev/null | wc -l)
+	  commit_count=$(git rev-list --after='1 week' --count HEAD)
+	  if test "$state" -gt 18; then
+      m="$state uncommited changes."
+    fi
+	  if test "$state" -ne 0 -a "$commit_count" -eq 0; then
+      m="Last change $(git log -1 --format=%cs)."
+    fi
+	  if test -n "$m"; then
+	    echo -e "\e[31mDo you even use git? $m\e[0m"
+	  fi
+  fi
+}
 
 __ps1() {
     local P='$' dir="${PWD##*/}" B r='\[\e[31m\]' g='\[\e[30m\]' u='\[\e[33m\]' p='\[\e[34m\]' w='\[\e[35m\]' b='\[\e[36m\]' x='\[\e[0m\]';
@@ -113,7 +128,7 @@ __ps1() {
     PS1="$w$dir$B\n$g$p$P$x "
 }
 
-PROMPT_COMMAND="__ps1"
+PROMPT_COMMAND="__dirty_git;__ps1"
 
 #-------------------- keyboard --------------------
 
