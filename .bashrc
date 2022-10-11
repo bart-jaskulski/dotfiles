@@ -88,7 +88,7 @@ __dirty_git() {
 	  SCM=1
 	fi
 	if test $SCM == 1; then
-	  local state, commit_count, m
+	  local state commit_count m
     state=$(git status --short 2>/dev/null | wc -l)
 	  commit_count=$(git rev-list --after='1 week' --count HEAD)
 	  if test "$state" -gt 18; then
