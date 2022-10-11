@@ -138,8 +138,9 @@ mode "move" {
 
 bindsym $mod+i mode "move"
 
-default_border pixel
+default_border pixel 4
 hide_edge_borders smart
+for_window [all] border pixel 4
 
 # Colors set from ~/.Xresources
 set_from_resource	$background	background
@@ -175,5 +176,5 @@ client.placeholder	    $foreground	$background	$foreground	$background		$backgro
 #############################
 ### settings for i3-gaps: ###
 #############################
-gaps inner 18
-gaps top 32
+# gaps inner 18
+# gaps top 32

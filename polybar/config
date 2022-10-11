@@ -14,16 +14,16 @@ magenta	    = ${xrdb:color5}
 cyan	    = ${xrdb:color6}
 white	    = ${xrdb:color7}
 ;Color alias
-background  = ${colors.black}
+background  = ${xrdb:background}
 foreground  = ${colors.white}
 
 [bar/base]
+monitor = ${env:MONITOR:eDP-1}
 enable-ipc = true
 
 height = 28
-;radius = 10
 
-offset-y = 8
+bottom = true
 
 font-0 = "iAWriterMonoS:style=Regular:size=8;1"
 font-1 = "Font Awesome 5 Brands:pixelsize=11;2"
@@ -34,42 +34,21 @@ font-4 = "iMWritingMonoS Nerd Font:style=Regular:size=11;1"
 background = ${colors.background}
 foreground = ${colors.foreground}
 
-padding = 2
-
-override-redirect = true
-wm-restack = i3
+padding = 4
 
 module-margin = 2
 
-[bar/left]
+[bar/new]
 inherit = bar/base
-width = 170
 modules-left = i3
-scroll-up = i3wm-wsnext
-scroll-down = i3wm-wsprev
-offset-x = 18
+modules-right = pulseaudio battery date
 line-size = 2
-
-[bar/center]
-inherit = bar/base
-width = 75
-
-offset-x = 50%:-75
-modules-center = date
-
-cursor-click = pointer
-cursor-scroll = ns-resize
-
-[bar/right]
-inherit = bar/base
-width = 215
-offset-x = 100%:-233
-modules-center = pulseaudio battery wifi
 
 [module/i3]
 type = internal/i3
 format = <label-state>
 index-sort = true
+enable-scroll = false
 wrapping-scroll = false
 
 ; focused = Active workspace on focused monitor
@@ -94,21 +73,10 @@ label-urgent = %index%
 label-urgent-underline = ${colors.red}
 label-urgent-padding = 1.7
 
-[module/wifi]
-type = internal/network
-interface = wlp3s0
-interval = 3.0
-
-format-connected = <label-connected>
-label-connected =  %essid%
-
-format-disconnected = <label-disconnected>
-label-disconnected = %ifname% disconnected
-
 [module/date]
 type = custom/script
 interval = 30
-exec = date +"%H:%M"
+exec = date +"%d.%m (%a), %H:%M"
 click-left = ~/Scripts/popcal
 
 [module/pulseaudio]
