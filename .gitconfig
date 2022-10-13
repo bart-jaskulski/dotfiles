@@ -33,3 +33,17 @@
 	path = ~/Repos/WPDesk/.gitconfig
 [pull]
 	rebase = true
+[alias]
+  a = add
+	all = add --all
+	d = diff
+	dc = diff --cached
+	c = commit
+	cn = commit --no-verify
+	l = log --oneline
+	ll = log --oneline --all
+	s = status
+	ss = status --short --branch
+	p = push
+	pl = pull
+	st = stash push
