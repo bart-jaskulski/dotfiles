@@ -34,7 +34,7 @@
 [pull]
 	rebase = true
 [alias]
-  a = add
+	a = add
 	all = add --all
 	d = diff
 	dc = diff --cached
