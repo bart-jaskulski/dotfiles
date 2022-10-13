@@ -4,15 +4,13 @@ font pango:iAWriterMonoS 8
 
 #------------------ startup ---------------
 exec --no-startup-id redshift
-exec --no-startup-id ~/Applications/BreakTimer_5b60694dc565e207d16ab21f9465fd9a.AppImage
-# Set autotiling like in bspwm
-exec_always --no-startup-id autotiling
+# exec --no-startup-id ~/Applications/BreakTimer_5b60694dc565e207d16ab21f9465fd9a.AppImage
 exec --no-startup-id dunst
-exec --no-startup-id picom -b --experimental-backends
 exec --no-startup-id $HOME/Scripts/bar
 exec --no-startup-id /usr/bin/firefox-developer-edition
 
-exec --no-startup-id feh --bg-fill /usr/share/backgrounds/wallpaper-6.png /usr/share/backgrounds/wallpaper-5.jpg
+exec --no-startup-id feh --bg-fill ~/Pictures/Wallpapers/wallpaper-6.png \
+  ~/Pictures/Wallpapers/wallpaper-5.jpg
 
 #------------------------ keybindings ----------------------
 set $mod Mod4
@@ -26,13 +24,15 @@ floating_modifier $mod
 
 bindsym F1 fullscreen toggle
 bindsym F4 workspace back_and_forth
-bindsym F3 workspace next
+bindsym F3 exec --no-startup-id i3-msg 'scratchpad show' && \
+  i3-msg 'floating toggle' || \
+	i3-msg 'move scratchpad'
 bindsym F6 kill
 bindsym F8 exec --no-startup-id i3-msg '[class="firefox"] focus' \
   || firefox-developer-edition
 bindsym F9 exec --no-startup-id i3-msg \
 	'[title="^Project"] [class="^jetbrains\\-phpstorm$"] focus' \
-	|| $HOME/Scripts/ide
+	|| "$HOME/Scripts/ide"
 bindsym F10 exec --no-startup-id i3-msg '[class="^Alacritty$"] focus' \
   || i3-sensible-terminal
 
@@ -71,14 +71,6 @@ bindsym XF86AudioPlay exec --no-startup-id mpc toggle
 bindsym XF86AudioPrev exec --no-startup-id mpc prev && currentSong
 bindsym XF86AudioNext exec --no-startup-id mpc next && currentSong
 
-
-# move the currently focused window to the scratchpad
-bindsym $mod+Shift+minus move scratchpad
-
-# Show the next scratchpad window or hide the focused scratchpad window.
-# If there are multiple scratchpad windows, this command cycles through them.
-bindsym $mod+minus scratchpad show
-
 # {{{ Workspaces
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
@@ -97,7 +89,8 @@ workspace $ws1 output $scr1
 workspace $ws2 output $scr2 $scr1
 workspace $ws3 output $scr1
 
-for_window [class="Zoom Meeting"] floating enable
+for_window [class="(?i)zoom meeting"] floating enable
+for_window [title="(?i)devtools|developer tools"] resize set width 25 ppt
 
 # switch to workspace
 bindsym $mod+1 workspace number $ws1
@@ -145,8 +138,9 @@ mode "move" {
 
 bindsym $mod+i mode "move"
 
-default_border none
-hide_edge_borders both
+default_border pixel 4
+hide_edge_borders smart
+for_window [all] border pixel 4
 
 # Colors set from ~/.Xresources
 set_from_resource	$background	background
@@ -169,18 +163,18 @@ set_from_resource	$color14	color14
 set_from_resource	$color15	color15
 
 # Theme colors
-# class                 border  	backgr. 	text    	indic.  	child_border
+# class                 border  	  backgr. 	  text    	  indic.  	    child_border
 # My colors
 client.background	$color0
 
-client.focused         	$color4		$background	$foreground	$background		$background
+client.focused         	$color4		  $background	$foreground	$background   $color4
 client.unfocused       	$foreground	$background	$foreground	$background		$background
 client.focused_inactive	$foreground	$background	$foreground	$background		$background
-client.urgent		$foreground	$background	$foreground	$background		$background
-client.placeholder	$foreground	$background	$foreground	$background		$background
+client.urgent		        $foreground	$background	$foreground	$background		$background
+client.placeholder	    $foreground	$background	$foreground	$background		$background
 
 #############################
 ### settings for i3-gaps: ###
 #############################
-gaps inner 18
-gaps top 32
+# gaps inner 18
+# gaps top 32

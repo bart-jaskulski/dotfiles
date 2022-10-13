@@ -2,7 +2,7 @@ window:
   padding:
     x: 12
     y: 12
-  decorations: none
+#   decorations: none
   dynamic_title: false
 
 shell:
@@ -19,7 +19,7 @@ font:
   normal:
     family: iMWritingMonoS Nerd Font
     style: Regular
-  size: 11.5
+  size: 16
 
 colors:
   cursor:

@@ -5,18 +5,16 @@ case $- in
     *) return;;
 esac
 
-#------------ utils ----------------
-
-_have() { type "$1" &>/dev/null; }
-
 #------------- env ----------------
 
+export GPG_TTY=$(tty)
 export REPOS="$HOME/Repos"
 export CLICOLOR=1
 export LSCOLORS=ExFxBxDxCxegedabagacad
 export TERM=xterm-256color
 export EDITOR=vim
 export VISUAL=vim
+export GITLAB_HOST='https://gitlab.wpdesk.dev'
 export LESS_TERMCAP_mb=$'\e[1;32m'
 export LESS_TERMCAP_md=$'\e[1;32m'
 export LESS_TERMCAP_me=$'\e[0m'
@@ -24,6 +22,7 @@ export LESS_TERMCAP_se=$'\e[0m'
 export LESS_TERMCAP_so=$'\e[01;33m'
 export LESS_TERMCAP_ue=$'\e[0m'
 export LESS_TERMCAP_us=$'\e[1;4;31m'
+# export DOCKER_HOST=unix:///run/user/1000/podman/podman.sock
 
 #----------------- path ------------------------
 
@@ -48,17 +47,14 @@ pathprepend() {
   done
 } && export pathprepend
 
-pathprepend \
-  "$HOME/Scripts"
+pathprepend "$HOME/Scripts"
 
-pathappend \
-  "$HOME/.config/composer/vendor/bin" \
+pathappend "$HOME/.config/composer/vendor/bin" \
   "$HOME/bin"
 
 #--------------- cdpath
 
-export CDPATH=".:$REPOS:~/Developement:~/Developement/WPDesk"
-
+export CDPATH=".:$REPOS:$REPOS/WPDesk"
 
 #---------------- shell options -----------------
 
@@ -85,7 +81,27 @@ shopt -s cmdhist
 # --------------------------- smart prompt ---------------------------
 #                 (keeping in bashrc for portability)
 
-PROMPT_AT=@
+__dirty_git() {
+  local SCM=0
+  if test -f .git/HEAD -o -n "$(git rev-parse --is-inside-work-tree 2> /dev/null)"
+	then
+	  SCM=1
+	fi
+	if test $SCM == 1; then
+	  local state commit_count m
+    state=$(git status --short 2>/dev/null | wc -l)
+	  commit_count=$(git rev-list --after='1 week' --count HEAD)
+	  if test "$state" -gt 18; then
+      m="$state uncommited changes."
+    fi
+	  if test "$state" -ne 0 -a "$commit_count" -eq 0; then
+      m="Last change $(git log -1 --format=%cs)."
+    fi
+	  if test -n "$m"; then
+	    echo -e "\e[31mDo you even use git? $m\e[0m"
+	  fi
+  fi
+}
 
 __ps1() {
     local P='$' dir="${PWD##*/}" B r='\[\e[31m\]' g='\[\e[30m\]' u='\[\e[33m\]' p='\[\e[34m\]' w='\[\e[35m\]' b='\[\e[36m\]' x='\[\e[0m\]';
@@ -112,7 +128,7 @@ __ps1() {
     PS1="$w$dir$B\n$g$p$P$x "
 }
 
-PROMPT_COMMAND="__ps1"
+PROMPT_COMMAND="__dirty_git;__ps1"
 
 #-------------------- keyboard --------------------
 
@@ -134,30 +150,4 @@ alias chmox='chmod +x'
 alias k='clear'
 alias r=ranger
 alias vi=vim
-alias ga='git add'
-alias gall='git add --all'
-alias gdf='git diff'
-alias gdfc='git diff --cached'
-alias gs='git status'
-alias gss='git stats --short'
-alias gc='git commit'
-alias gcv='git commit --no-verify'
-alias gcm='git commit --message'
-alias gcmv='git commit --no-verify --message'
-alias gcaev='git commit --amend --no-edit --no-verify'
-alias gsw='git switch'
-alias gswc='git switch --create'
-alias gl='git log --oneline'
-alias gla='git log --oneline --all'
-alias gm='git merge'
-alias gmf='git merge --no-ff'
-alias gp='git push'
-alias gpo='git push origin'
-alias gpl='git pull'
-alias gst='git stash'
-alias gstm='git stash push --message'
-alias gstpo='git stash pop'
-alias gstpu='git stash push'
-alias gstl='git stash list'
-
-eval "$(zoxide init bash)"
+alias g='git'

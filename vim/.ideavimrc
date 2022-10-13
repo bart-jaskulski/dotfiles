@@ -1,0 +1,70 @@
+" Enable persistent undo.
+set undofile
+
+set hlsearch
+set incsearch
+" Show line numbers as relative so relative navigation is easier. Show actual
+" line number for active line.
+set number
+set relativenumber
+
+set tabstop=4 softtabstop=4
+set shiftwidth=
+set expandtab
+set smartindent
+set ignorecase
+set smartcase
+set autoindent
+
+set linebreak
+set showmatch
+set scrolloff=8
+set noshowmode
+set cursorline
+set ruler
+
+let mapleader=" "
+set timeoutlen "500"
+
+set ideajoin
+set ideastatusicon='disabled'
+
+set NERDTree
+set surround
+set commentary
+set highlightedyank
+
+map <C-\> :NERDTreeFocus<CR>
+map <leader>fw :action FindInPath<CR>
+map <leader>ff :action GotoFile<CR>
+map <leader><space> :action RecentFiles<CR>
+" map <leader><space> <Action>(Switcher)
+
+map <leader>di :action StepInto<CR>
+map <leader>do :action StepOut<CR>
+map <leader>dn :action StepOver<CR>
+map <leader>dl :action LineBreakpoint<CR>
+map <leader>dr :action Resume<CR>
+
+map <leader>x :action CloseContent<CR>
+
+map gi :action GotoImplementation<CR>
+map <leader>D :action GotoTypeDeclaration<CR>
+
+"" Go to recent tab
+map gl :b#<CR>
+
+map <C-h> :noh<CR>
+
+"" map [d :action GotoPreviousError<CR>
+"" map d] :action GotoNextError<CR>
+
+map <leader>fm :action ReformatCode<CR>
+
+"" Y yank until the end of line
+map Y y$
+
+map <leader>y "+y
+map <leader>Y gg"+y
+
+map \r :action IdeaVim.ReloadVimRc.reload<CR>

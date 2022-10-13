@@ -4,7 +4,6 @@ killall -q polybar
 
 while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done;
 
-polybar -q left & disown
-polybar -q center & disown
-polybar -q right & disown
-
+for m in $(polybar --list-monitors | cut -d: -f1); do
+			MONITOR=$m polybar -q new & disown
+done

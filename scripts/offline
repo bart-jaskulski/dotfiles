@@ -6,10 +6,11 @@
 function check_online() {
   while ! ping -4 -c 1 google.com. &> /dev/null; do
     echo -e "\033[0;31mStill offline..."
-    sleep 1
+    sleep 3
   done
 
   echo -e "\033[0;32mSuccesfully connected!"
+  exit 0
 }
 
 echo "Checking your connection..."
