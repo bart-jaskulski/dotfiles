@@ -22,6 +22,7 @@ export LESS_TERMCAP_se=$'\e[0m'
 export LESS_TERMCAP_so=$'\e[01;33m'
 export LESS_TERMCAP_ue=$'\e[0m'
 export LESS_TERMCAP_us=$'\e[1;4;31m'
+export PNPM_HOME="$HOME/.local/share/pnpm"
 # export DOCKER_HOST=unix:///run/user/1000/podman/podman.sock
 
 #----------------- path ------------------------
@@ -50,6 +51,8 @@ pathprepend() {
 pathprepend "$HOME/Scripts"
 
 pathappend "$HOME/.config/composer/vendor/bin" \
+  "$HOME/go/bin" \
+  "$PNPM_HOME" \
   "$HOME/bin"
 
 #--------------- cdpath
@@ -84,22 +87,22 @@ shopt -s cmdhist
 __dirty_git() {
   local SCM=0
   if test -f .git/HEAD -o -n "$(git rev-parse --is-inside-work-tree 2> /dev/null)"
-	then
-	  SCM=1
-	fi
-	if test $SCM == 1; then
-	  local state commit_count m
+    then
+    SCM=1
+  fi
+  if test $SCM == 1; then
+    local state commit_count m
     state=$(git status --short 2>/dev/null | wc -l)
-	  commit_count=$(git rev-list --after='1 week' --count HEAD)
-	  if test "$state" -gt 18; then
+    commit_count=$(git rev-list --after='1 week' --count HEAD 2>/dev/null || echo 0)
+    if test "$state" -gt 18; then
       m="$state uncommited changes."
     fi
-	  if test "$state" -ne 0 -a "$commit_count" -eq 0; then
+    if test "$state" -ne 0 -a "$commit_count" -eq 0; then
       m="Last change $(git log -1 --format=%cs)."
     fi
-	  if test -n "$m"; then
-	    echo -e "\e[31mDo you even use git? $m\e[0m"
-	  fi
+    if test -n "$m"; then
+      echo -e "\e[31mDo you even use git? $m\e[0m"
+    fi
   fi
 }
 
@@ -151,3 +154,4 @@ alias k='clear'
 alias r=ranger
 alias vi=vim
 alias g='git'
+alias bm=shiori
