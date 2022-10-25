@@ -1,9 +1,5 @@
 set nocompatible
 
-set autoindent
-
-set autowrite
-
 set number
 set relativenumber
 
@@ -12,14 +8,20 @@ set ruler
 " Show command and insert mode
 set showmode
 
+" Use some unified indentation rules
+set autoindent
+set smartindent
+set smarttab
+set expandtab
 set tabstop=2
 set softtabstop=2
+set shiftwidth=2
+
+" Format long text
+set textwidth=72
+set formatoptions=tcroqwan1jp
 
 let mapleader = " "
-
-set smartindent
-
-set smarttab
 
 set nobackup
 set noswapfile
@@ -34,8 +36,6 @@ set hidden
 set ttyfast
 
 filetype plugin on
-
-map Y y$
 
 set wildmenu
 
@@ -60,7 +60,6 @@ set rulerformat=%30(%=%#LineNr#%.50f\ [%{strlen(&ft)?&ft:'none'}]\ %l:%c\ %p%%%)
 
 match IncSearch '\s\+$'
 
-set textwidth=72
 set hidden
 
 hi Normal ctermbg=NONE
@@ -75,9 +74,17 @@ set omnifunc=syntaxcomplete#Complete
 
 set showtabline=2
 
+set listchars=tab:>=
+set list
+
 noremap <C-h> <C-w>h
 noremap <C-j> <C-w>j
 noremap <C-k> <C-w>k
 noremap <C-l> <C-w>l
 
 nnoremap <silent> <leader>x :q<CR>
+
+" Yank consistent with delete or select
+map Y y$
+
+autocmd FileType gitcommit,markdown setlocal spell

@@ -1,3 +1,7 @@
-# What? Why?
-
-# type:feat,fix,chore,refactor,test,build,ci,style,revert,docs
+# Your commit message should always cover what do you change, preferably
+# in one sentence. Yet more importantly, remember to explain **why** you
+# introduce specific change.
+#
+# Also, it's good to sign-off your commit, but to it carefully:
+#
+# > With great power comes great responsibility.

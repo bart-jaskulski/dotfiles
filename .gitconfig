@@ -31,19 +31,22 @@
 	defaultBranch = main
 [includeIf "gitdir:~/Repos/WPDesk/"]
 	path = ~/Repos/WPDesk/.gitconfig
+[push]
+  autoSetupRemote = true
 [pull]
 	rebase = true
 [alias]
   a = add
-	all = add --all
-	d = diff
-	dc = diff --cached
-	c = commit
-	cn = commit --no-verify
-	l = log --oneline
-	ll = log --oneline --all
-	s = status
-	ss = status --short --branch
-	p = push
-	pl = pull
-	st = stash push
+  all = add --all
+  df = diff
+  dfc = diff --cached
+  c = commit
+  cn = commit --no-verify
+  l = log --oneline
+  l1 = log -1 --oneline
+  ll = log --oneline --all
+  s = status
+  ss = status --short --branch
+  p = push
+  pl = pull
+  st = stash push
