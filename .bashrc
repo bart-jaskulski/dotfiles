@@ -155,3 +155,9 @@ alias r=ranger
 alias vi=vim
 alias g='git'
 alias bm=shiori
+
+if [ -f "/usr/share/git/completion/git-completion.bash" ]; then
+  source /usr/share/git/completion/git-completion.bash
+  __git_complete g __git_main
+fi
+
