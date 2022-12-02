@@ -19,7 +19,7 @@ set shiftwidth=2
 
 " Format long text
 set textwidth=72
-set formatoptions=tcroqwan1jp
+set formatoptions=cq1lmMjp
 
 let mapleader = " "
 
@@ -33,6 +33,7 @@ set linebreak
 set ignorecase smartcase
 
 set hidden
+
 set ttyfast
 
 filetype plugin on
@@ -88,3 +89,6 @@ nnoremap <silent> <leader>x :q<CR>
 map Y y$
 
 autocmd FileType gitcommit,markdown setlocal spell
+
+" Simply open links with `gx` through lynx in new window
+let g:netrw_browsex_viewer= "tmux new-window lynx"
