@@ -41,7 +41,7 @@ module-margin = 2
 [bar/new]
 inherit = bar/base
 modules-left = i3
-modules-right = pulseaudio battery date
+modules-right = pulseaudio battery pomo date
 line-size = 2
 
 [module/i3]
@@ -78,6 +78,11 @@ type = custom/script
 interval = 30
 exec = date +"%d.%m (%a), %H:%M"
 click-left = ~/Scripts/popcal
+
+[module/pomo]
+type = custom/script
+interval = 1
+exec = pomo
 
 [module/pulseaudio]
 type = internal/pulseaudio
