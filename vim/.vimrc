@@ -88,7 +88,10 @@ nnoremap <silent> <leader>x :q<CR>
 " Yank consistent with delete or select
 map Y y$
 
-autocmd FileType gitcommit,markdown setlocal spell
+au FileType gitcommit,markdown,text setlocal spell
+au FileType markdown,text set tw=0
+au FileType markdown,text noremap j gj
+au FileType markdown,text noremap k gk
 
 " Simply open links with `gx` through lynx in new window
 let g:netrw_browsex_viewer= "tmux new-window lynx"
