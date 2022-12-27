@@ -35,6 +35,8 @@
   autoSetupRemote = true
 [pull]
 	rebase = true
+[tag]
+  sort = version:refname
 [alias]
   a = add
   all = add --all
@@ -50,3 +52,4 @@
   p = push
   pl = pull
   st = stash push
+  sw = switch
