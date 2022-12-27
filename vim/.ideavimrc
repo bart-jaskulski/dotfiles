@@ -68,3 +68,4 @@ map <leader>y "+y
 map <leader>Y gg"+y
 
 map \r :action IdeaVim.ReloadVimRc.reload<CR>
+map <leader>rr :action Rerun<CR>
