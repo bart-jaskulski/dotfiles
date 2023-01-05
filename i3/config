@@ -90,6 +90,7 @@ workspace $ws2 output $scr2 $scr1
 workspace $ws3 output $scr1
 
 for_window [class="(?i)zoom meeting"] floating enable
+for_window [title="(?i)welcome to phpstorm"] floating enable
 for_window [title="(?i)devtools|developer tools"] resize set width 25 ppt
 
 # switch to workspace

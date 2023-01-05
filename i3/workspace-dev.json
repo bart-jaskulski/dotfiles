@@ -28,7 +28,7 @@
                        "y": 11
                     },
                     "marks": [],
-                    "name": "Project - shopmagic-for-woocommerce",
+                    "name": "Viewer",
                     "percent": null,
                     "swallows": [
                        {
@@ -63,12 +63,13 @@
                "y": 32
             },
             "marks": [],
-            "name": "shopmagic-for-woocommerce – OrderShippingMethodTest.php",
+            "name": "Project",
             "percent": 1,
             "swallows": [
                {
                 "class": "^jetbrains\\-phpstorm$",
-                "instance": "^jetbrains\\-phpstorm$"
+                "instance": "^jetbrains\\-phpstorm$",
+                "title": "^(?!(splash|Welcome to PhpStorm)$).*"
                }
             ],
             "type": "con"
