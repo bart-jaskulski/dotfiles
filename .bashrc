@@ -92,7 +92,7 @@ __dirty_git() {
   fi
   if test $SCM == 1; then
     local state commit_count m
-    state=$(git status --short 2>/dev/null | wc -l)
+    state=$(( $(git status --short 2>/dev/null | wc -l) - 1 )) # First line is branch name
     commit_count=$(git rev-list --after='1 week' --count HEAD 2>/dev/null || echo 0)
     if test "$state" -gt 18; then
       m="$state uncommited changes."
