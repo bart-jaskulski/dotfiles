@@ -150,6 +150,7 @@ alias x=exit
 alias ..='cd ..'
 alias ...='cd ../..'
 alias chmox='chmod +x'
+alias temp='cd $(mktemp -d)'
 alias k='clear'
 alias r=ranger
 alias vi=vim
