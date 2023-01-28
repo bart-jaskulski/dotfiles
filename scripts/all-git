@@ -1,0 +1,7 @@
+#!/bin/bash
+# Run through all child folders and prompt git status, if tree is not
+# clean
+
+find -name '.git' -type d -not -path '**vendor**' -print0 2>/dev/null | \
+  xargs -r0 -n1 /bin/bash -c 'D="$(dirname "$@")"; if [[ $(git -C "$D" status --short | wc -l) -gt 1 ]]; then echo -e "\e[34mStatus of $D\e[0m"; git -C "$D" status; fi' ''
+
