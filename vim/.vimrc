@@ -78,6 +78,8 @@ set showtabline=2
 set listchars=tab:>=
 set list
 
+set path+=**
+
 noremap <C-h> <C-w>h
 noremap <C-j> <C-w>j
 noremap <C-k> <C-w>k
