@@ -1,40 +1,42 @@
 [user]
-	email = bjaskulski@protonmail.com
-	name = Bart Jaskulski
-	signingkey = 845132DFBE314ACF
+  email = bjaskulski@protonmail.com
+  name = Bart Jaskulski
+  signingkey = 845132DFBE314ACF
 [core]
-	editor = vim
-	excludesFile = ~/.gitignore
-	autocrlf = input
+  editor = vim
+  excludesFile = ~/.gitignore
+  autocrlf = input
 [commit]
-	gpgsign = true
-	template = ~/.gitmessage
-	verbose = true
+  gpgsign = true
+  template = ~/.gitmessage
+  verbose = true
 [color]
-	ui = auto
+  ui = auto
 [color "branch"]
-	current = yellow reverse
-	local = yellow
-	remote = green
+  current = yellow reverse
+  local = yellow
+  remote = green
 [color "diff"]
-	meta = yellow bold
-	frag = magenta bold # line info
-	old = red # deletions
-	new = green # additions
+  meta = yellow bold
+  frag = magenta bold # line info
+  old = red # deletions
+  new = green # additions
 [color "status"]
-	added = yellow
-	changed = green
-	untracked = cyan
+  added = yellow
+  changed = green
+  untracked = cyan
+[merge]
+  ff = false
 [help]
-	autocorrect = 1
+  autocorrect = 1
 [init]
-	defaultBranch = main
+  defaultBranch = main
 [includeIf "gitdir:~/Repos/WPDesk/"]
-	path = ~/Repos/WPDesk/.gitconfig
+  path = ~/Repos/WPDesk/.gitconfig
 [push]
   autoSetupRemote = true
 [pull]
-	rebase = true
+  rebase = true
 [tag]
   sort = version:refname
 [alias]
