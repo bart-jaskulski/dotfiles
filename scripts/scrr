@@ -1,6 +1,7 @@
 #!/bin/bash
 
-image="$(mktemp)"
-import "png:$image" -strip
-notify-send --expire-time=1000 --icon="$image" "Screenshot taken."
+image="$(mktemp -u --suffix=".png")"
+scrot -s $image
+# import "png:$image" -strip
+notify --icon="$image" "Screenshot taken."
 xclip -selection clipboard -target image/png "$image"
