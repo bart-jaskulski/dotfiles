@@ -1,0 +1,6 @@
+#!/bin/sh
+
+rm -rf ~/.config/lynx 2>/dev/null
+mkdir ~/.config/lynx
+ln -s "$PWD/lynx.cfg" ~/.config/lynx/lynx.cfg
+ln -s "$PWD/lynx.lss" ~/.config/lynx/lynx.lss
