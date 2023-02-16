@@ -3,14 +3,13 @@
 font pango:iAWriterMonoS 8
 
 #------------------ startup ---------------
-exec --no-startup-id redshift
-# exec --no-startup-id ~/Applications/BreakTimer_5b60694dc565e207d16ab21f9465fd9a.AppImage
+exec --no-startup-id redshift -o
 exec --no-startup-id dunst
 exec --no-startup-id $HOME/Scripts/bar
-exec --no-startup-id /usr/bin/firefox-developer-edition
+exec --no-startup-id /usr/bin/firefox
 
-exec --no-startup-id feh --bg-fill ~/Pictures/Wallpapers/wallpaper-6.png \
-  ~/Pictures/Wallpapers/wallpaper-5.jpg
+# exec --no-startup-id feh --bg-fill ~/Pictures/Wallpapers/wallpaper-6.png \
+#   ~/Pictures/Wallpapers/wallpaper-5.jpg
 
 #------------------------ keybindings ----------------------
 set $mod Mod4
@@ -29,18 +28,18 @@ bindsym F3 exec --no-startup-id i3-msg 'scratchpad show' && \
 	i3-msg 'move scratchpad'
 bindsym F6 kill
 bindsym F8 exec --no-startup-id i3-msg '[class="firefox"] focus' \
-  || firefox-developer-edition
+  || firefox
 bindsym F9 exec --no-startup-id i3-msg \
 	'[title="^Project"] [class="^jetbrains\\-phpstorm$"] focus' \
 	|| "$HOME/Scripts/ide"
-bindsym F10 exec --no-startup-id i3-msg '[class="^Alacritty$"] focus' \
-  || i3-sensible-terminal
+bindsym F10 exec --no-startup-id i3-msg '[title="^rxvt$"] focus' \
+  || rxvt
 
 bindsym $mod+d exec --no-startup-id rofi -modi drun -show drun
 bindsym $mod+p exec --no-startup-id rofi-pass --last-used
 bindsym $mod+c exec --no-startup-id rofi -modi calc -show calc
-bindsym $mod+e exec --no-startup-id pkill redshift
-bindsym $mod+Shift+e exec --no-startup-id redshift
+bindsym $mod+e exec --no-startup-id redshift -x
+bindsym $mod+Shift+e exec --no-startup-id redshift -o
 bindsym --release Print exec --no-startup-id ~/Scripts/scrr
 
 # {{{ Navigation
@@ -173,9 +172,3 @@ client.unfocused       	$foreground	$background	$foreground	$background		$backgr
 client.focused_inactive	$foreground	$background	$foreground	$background		$background
 client.urgent		        $foreground	$background	$foreground	$background		$background
 client.placeholder	    $foreground	$background	$foreground	$background		$background
-
-#############################
-### settings for i3-gaps: ###
-#############################
-# gaps inner 18
-# gaps top 32
