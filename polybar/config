@@ -1,21 +1,21 @@
 [colors]
-background-alt = #444
-foreground-alt = #555
-primary = #ffb52a
-secondary = #e60053
-alert = #bd2c40
-transparent = #00000000
-black	    = ${xrdb:color0}
-red	    = ${xrdb:color1}
-green 	    = ${xrdb:color2}
-yellow	    = ${xrdb:color3}
-blue	    = ${xrdb:color4}
-magenta	    = ${xrdb:color5}
-cyan	    = ${xrdb:color6}
-white	    = ${xrdb:color7}
+background-alt  =  #444
+foreground-alt  =  #555
+primary         =  #ffb52a
+secondary       =  #e60053
+alert           =  #bd2c40
+transparent     =  #00000000
+black           =  ${xrdb:color0}
+red             =  ${xrdb:color1}
+green           =  ${xrdb:color2}
+yellow          =  ${xrdb:color3}
+blue            =  ${xrdb:color4}
+magenta         =  ${xrdb:color5}
+cyan            =  ${xrdb:color6}
+white           =  ${xrdb:color7}
 ;Color alias
-background  = ${xrdb:background}
-foreground  = ${colors.white}
+background  =  ${xrdb:background}
+foreground  =  ${xrdb:foreground}
 
 [bar/base]
 monitor = ${env:MONITOR:eDP-1}
