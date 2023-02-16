@@ -5,6 +5,10 @@ case $- in
     *) return;;
 esac
 
+# ---------------------- local utility functions ---------------------
+
+_have()      { type "$1" &>/dev/null; }
+
 #------------- env ----------------
 
 export GPG_TTY=$(tty)
@@ -15,6 +19,7 @@ export TERM=xterm-256color
 export EDITOR=vim
 export VISUAL=vim
 export GITLAB_HOST='https://gitlab.wpdesk.dev'
+export LESS="-FXR"
 export LESS_TERMCAP_mb=$'\e[1;32m'
 export LESS_TERMCAP_md=$'\e[1;32m'
 export LESS_TERMCAP_me=$'\e[0m'
@@ -57,7 +62,7 @@ pathappend "$HOME/.config/composer/vendor/bin" \
 
 #--------------- cdpath
 
-export CDPATH=".:$REPOS:$REPOS/WPDesk"
+export CDPATH=".:$REPOS"
 
 #---------------- shell options -----------------
 
@@ -135,13 +140,13 @@ PROMPT_COMMAND="__dirty_git;__ps1"
 
 #-------------------- keyboard --------------------
 
-setxkbmap -option caps:shiftlock
+_have setxkbmap && test -n "$DISPLAY" && \
+  setxkbmap -option caps:shiftlock
 
 #---------------- aliases -----------------
 
 unalias -a
 alias c=composer
-alias dc='docker-compose'
 alias ls='ls -h --color=auto'
 alias ll='ls -al'
 alias la='ls -AF'
@@ -155,10 +160,17 @@ alias k='clear'
 alias r=ranger
 alias vi=vim
 alias g='git'
-alias bm=shiori
 
 if [ -f "/usr/share/git/completion/git-completion.bash" ]; then
   source /usr/share/git/completion/git-completion.bash
   __git_complete g __git_main
 fi
 
+# Copied from bash skeleton to make sure we load completions
+if ! shopt -oq posix; then
+  if [ -f /usr/share/bash-completion/bash_completion ]; then
+    . /usr/share/bash-completion/bash_completion
+  elif [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+  fi
+fi
