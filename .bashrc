@@ -174,3 +174,7 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
+
+_have gh && . <(gh completion -s bash)
+_have composer && . <(composer completion)
+_have glab && . <(glab completion)
