@@ -3,8 +3,6 @@
 font pango:iAWriterMonoS 8
 
 #------------------ startup ---------------
-exec --no-startup-id redshift -o
-exec --no-startup-id dunst
 exec --no-startup-id $HOME/Scripts/bar
 exec --no-startup-id /usr/bin/firefox
 
