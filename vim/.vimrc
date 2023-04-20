@@ -80,6 +80,9 @@ set list
 
 set path+=**
 
+" Use ripgrep for searching
+set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
+
 noremap <C-h> <C-w>h
 noremap <C-j> <C-w>j
 noremap <C-k> <C-w>k
