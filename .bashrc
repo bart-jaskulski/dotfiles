@@ -89,54 +89,46 @@ shopt -s cmdhist
 # --------------------------- smart prompt ---------------------------
 #                 (keeping in bashrc for portability)
 
-__dirty_git() {
-  local SCM=0
-  if test -f .git/HEAD -o -n "$(git rev-parse --is-inside-work-tree 2> /dev/null)"
-    then
-    SCM=1
-  fi
-  if test $SCM == 1; then
-    local state commit_count m
-    state=$(( $(git status --short 2>/dev/null | wc -l) - 1 )) # First line is branch name
-    commit_count=$(git rev-list --after='1 week' --count HEAD 2>/dev/null || echo 0)
-    if test "$state" -gt 18; then
-      m="$state uncommited changes."
-    fi
-    if test "$state" -ne 0 -a "$commit_count" -eq 0; then
-      m="Last change $(git log -1 --format=%cs)."
-    fi
-    if test -n "$m"; then
-      echo -e "\e[31mDo you even use git? $m\e[0m"
-    fi
-  fi
-}
-
 __ps1() {
-    local P='$' dir="${PWD##*/}" B r='\[\e[31m\]' g='\[\e[30m\]' u='\[\e[33m\]' p='\[\e[34m\]' w='\[\e[35m\]' b='\[\e[36m\]' x='\[\e[0m\]';
-    [[ $EUID == 0 ]] && P='#' && u=$r && p=$u;
+  local P='$' dir B changes_count last_commit\
+    r='\[\e[31m\]' g='\[\e[30m\]' u='\[\e[33m\]'\
+    p='\[\e[34m\]' w='\[\e[35m\]' b='\[\e[36m\]'\
+    x='\[\e[0m\]';
+
+  [[ $EUID == 0 ]] && P='#' && u=$r && p=$u; # root
+  [[ $PWD = / ]] && dir=/;
+  [[ $PWD = "$HOME" ]] && dir='~';
+
+  if [[ ! -n "$dir" ]]; then
     IFS=/;
     read -ra dirs <<< "${PWD/"$HOME"/"~"}";
     truncate=();
     for dir in "${dirs[@]:0:((${#dirs[@]} - 1))}";
     do
-        if [[ "${dir:0:1}" == "." ]]; then
-            truncate+=("${dir:0:2}");
-        else
-            truncate+=("${dir:0:1}");
-        fi;
+      if [[ "${dir:0:1}" == "." ]]; then
+        truncate+=("${dir:0:2}");
+      else
+        truncate+=("${dir:0:1}");
+      fi;
     done;
     dir="${truncate[*]}/${dirs[-1]}";
     IFS=;
-    [[ $PWD = / ]] && dir=/;
-    [[ $PWD = "$HOME" ]] && dir='~';
-    B=$(git branch --show-current 2>/dev/null);
-    [[ $dir = "$B" ]] && B=.;
-    [[ $B = master || $B = main ]] && b="$r";
-    [[ -n "$B" ]] && B="$b($B)";
-    PS1="$w$dir$B\n$g$p$P$x "
+  fi;
+
+  changes_count=$(git status --porcelain 2>/dev/null | awk '{a[$1]++} END {for (pair in a) {printf("%s %d%s", pair, a[pair], (++i==length(a))?ORS:", ")}}')
+  last_commit=$(git log -1 --format=%cd --date=format:%d.%m.%g 2>/dev/null || echo 0)
+
+  B=$(git branch --show-current 2>/dev/null);
+  [[ $dir = "$B" ]] && B=.;
+
+  [[ $B = master || $B = main ]] && b="$r";
+  [[ -n "$B" ]] && B="$b($B@$last_commit)$x";
+  [[ -n "$changes_count" ]] && B+="$p[${changes_count}]$x";
+
+  PS1="$w$dir$B\n$g$p$P$x "
 }
 
-PROMPT_COMMAND="__dirty_git;__ps1"
+PROMPT_COMMAND="__ps1"
 
 #-------------------- keyboard --------------------
 
