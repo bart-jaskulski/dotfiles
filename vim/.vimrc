@@ -1,5 +1,6 @@
 set nocompatible
 
+" Count line numbers from current row
 set number
 set relativenumber
 
@@ -15,36 +16,49 @@ set smarttab
 set expandtab
 set tabstop=2
 set softtabstop=2
+" mostly used with >> and <<
 set shiftwidth=2
 
-" Format long text
-set textwidth=72
-set formatoptions=cq1lmMjp
-
-let mapleader = " "
+" stop vim from silently messing with files that it shouldn't
+set nofixendofline
 
 set nobackup
 set noswapfile
 set nowritebackup
 
+set textwidth=72
+set formatoptions=cq1lmMjp
+
+" Avoid hit enter to continue
+set shortmess=aoOtTI
+
+let mapleader = " "
+
 set hlsearch
 set incsearch
 set linebreak
 set ignorecase smartcase
+" wrap around when searching
+set wrapscan
 
+" stop complaints about switching buffer with changes
 set hidden
 
+" faster scrolling
 set ttyfast
+
+" don't redraw while executing macros
+set lazyredraw
 
 filetype plugin on
 
+" better command-line completion
 set wildmenu
 
 syntax on
 colorscheme onedark
 
 set scrolloff=8
-set shortmess=aIT
 set clipboard=unnamed
 set nocursorline
 
@@ -52,16 +66,15 @@ set colorcolumn=80
 set ttimeout
 set ttimeoutlen=100
 
+" automatically read a file if changed outside
 set autoread
+" automatically write files when changing when multiple files open
 set autowrite
-
-set background=dark
 
 set rulerformat=%30(%=%#LineNr#%.50f\ [%{strlen(&ft)?&ft:'none'}]\ %l:%c\ %p%%%)
 
+" mark trailing spaces as errors
 match IncSearch '\s\+$'
-
-set hidden
 
 hi Normal ctermbg=NONE
 
@@ -71,11 +84,13 @@ set display=lastline
 set sidescrolloff=5
 
 set complete-=1
+" enable omni-completion
 set omnifunc=syntaxcomplete#Complete
 
 set showtabline=2
 
-set listchars=tab:>=
+" better ascii friendly listchars
+set listchars=lead:*,trail:*,nbsp:*,extends:>,precedes:<,tab:\|>
 set list
 
 set path+=**
