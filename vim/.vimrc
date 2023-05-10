@@ -96,7 +96,9 @@ set list
 set path+=**
 
 " Use ripgrep for searching
-set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
+if executable('rg')
+  set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
+endif
 
 noremap <C-h> <C-w>h
 noremap <C-j> <C-w>j
