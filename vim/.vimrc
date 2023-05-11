@@ -22,9 +22,10 @@ set shiftwidth=2
 " stop vim from silently messing with files that it shouldn't
 set nofixendofline
 
-set nobackup
-set noswapfile
-set nowritebackup
+" set nobackup
+" set nowritebackup
+" set noswapfile
+set directory=~/.vimswap
 
 set textwidth=72
 set formatoptions=cq1lmMjp
