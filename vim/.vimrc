@@ -101,15 +101,61 @@ endif
 
 set path+=**
 
+" Improve netrw
+let g:netrw_keepdir = 1
+let g:netrw_winsize = 25
+let g:netrw_banner = 0
+let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+' . netrw_gitignore#Hide()
+let g:netrw_hide = 1
+let g:netrw_localcopydircmdopt = ' -Rr'
+let g:netrw_localmkdiropt = ' -p'
+let g:netrw_localrmdiropt = ' -p'
+" Tree display
+let g:netrw_liststyle = 3
+let g:netrw_sizestyle = "H"
+
+hi! link netrwMarkFile Search
+
+" Simply open links with `gx` through lynx in new window
+let g:netrw_browsex_viewer= "tmux new-window lynx"
+
+" Open explorer in cwd
+nnoremap <leader><TAB> :Lexplore %:p:h<CR>
+
+" Add simpler bindings inside netrw
+function! NetrwMapping()
+  nmap <buffer> H u
+  nmap <buffer> h -^
+  nmap <buffer> l <CR>
+
+  nmap <buffer> P <C-w>z
+  nmap <buffer> L <CR>:Lexplore<CR>
+  nmap <buffer> <leader><TAB> :q<CR>
+  nmap <buffer> ~ :execute 'edit ' . getcwd()<CR>
+endfunction
+
+augroup netrw_mapping
+  autocmd!
+  autocmd filetype netrw call NetrwMapping()
+augroup END
+
+" View all buffers
+nnoremap <space><space> :ls<CR> :b <space>
+
 " Use ripgrep for searching
 if executable('rg')
   set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
 endif
 
-noremap <C-h> <C-w>h
-noremap <C-j> <C-w>j
-noremap <C-k> <C-w>k
-noremap <C-l> <C-w>l
+" Trailing space is intended
+nnoremap <silent> <leader>fw :lgrep 
+
+" NAVIGATION}}}
+
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
 
 nnoremap <silent> <leader>x :q<CR>
 
