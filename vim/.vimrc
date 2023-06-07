@@ -90,9 +90,14 @@ set omnifunc=syntaxcomplete#Complete
 
 set showtabline=2
 
+" Don't display chars in TTY
+if has_key(environ(), 'DISPLAY')
 " better ascii friendly listchars
-set listchars=lead:*,trail:*,nbsp:*,extends:>,precedes:<,tab:\|>
-set list
+  set listchars=lead:*,trail:*,nbsp:*,extends:>,precedes:<,tab:\|>
+  set list
+endif
+
+" {{{NAVIGATION
 
 set path+=**
 
