@@ -1,0 +1,6 @@
+#!/bin/bash
+
+git diff --name-status | \
+  fzf --ansi --delimiter '\t' \
+  --preview 'git diff --color=always -- {2}' \
+  --bind 'enter:execute(git add -p -- {2})'

@@ -1,0 +1,8 @@
+#!/bin/bash
+
+git log --format="%s @%h" | \
+  fzf --layout=reverse-list \
+  --no-sort --delimiter '@' \
+  --bind 'enter:execute(git show --color=always {2} | less -R)' \
+  --preview 'git show --no-patch {2}' \
+  --preview-window bottom "$@"
