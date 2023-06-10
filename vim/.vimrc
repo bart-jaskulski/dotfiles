@@ -1,63 +1,68 @@
+vim9script
+
 set nocompatible
 
-" Count line numbers from current row
+# Count line numbers from current row
 set number
 set relativenumber
 
 set ruler
 
-" Show command and insert mode
+# Show command and insert mode
 set showmode
 
-" Use some unified indentation rules
+# Use some unified indentation rules
 set autoindent
 set smartindent
 set smarttab
 set expandtab
 set tabstop=2
 set softtabstop=2
-" mostly used with >> and <<
+# mostly used with >> and <<
 set shiftwidth=2
 
-" stop vim from silently messing with files that it shouldn't
+# stop vim from silently messing with files that it shouldn't
 set nofixendofline
 
-" set nobackup
-" set nowritebackup
-" set noswapfile
+# set nobackup
+# set nowritebackup
+# set noswapfile
 set directory=~/.vimswap
 
 set textwidth=72
 set formatoptions=cq1lmMjp
 
-" Avoid hit enter to continue
+# Avoid hit enter to continue
 set shortmess=aoOtTI
 
-let mapleader = " "
+g:mapleader = " "
 
 set hlsearch
 set incsearch
 set linebreak
 set ignorecase smartcase
-" wrap around when searching
+# wrap around when searching
 set wrapscan
 
-" stop complaints about switching buffer with changes
+# stop complaints about switching buffer with changes
 set hidden
 
-" faster scrolling
+# faster scrolling
 set ttyfast
 
-" don't redraw while executing macros
+# don't redraw while executing macros
 set lazyredraw
 
 filetype plugin on
 
-" better command-line completion
+# better command-line completion
 set wildmenu
 
 syntax on
-colorscheme onedark
+
+# let g:everforest_transparent_background = 2
+# let base16colorspace=256
+# colorscheme one
 
 set scrolloff=8
 set clipboard=unnamed
@@ -67,14 +72,14 @@ set colorcolumn=80
 set ttimeout
 set ttimeoutlen=100
 
-" automatically read a file if changed outside
+# automatically read a file if changed outside
 set autoread
-" automatically write files when changing when multiple files open
+# automatically write files when changing when multiple files open
 set autowrite
 
 set rulerformat=%30(%=%#LineNr#%.50f\ [%{strlen(&ft)?&ft:'none'}]\ %l:%c\ %p%%%)
 
-" mark trailing spaces as errors
+# mark trailing spaces as errors
 match IncSearch '\s\+$'
 
 hi Normal ctermbg=NONE
@@ -85,45 +90,45 @@ set display=lastline
 set sidescrolloff=5
 
 set complete-=1
-" enable omni-completion
-set omnifunc=syntaxcomplete#Complete
+# enable omni-completion
+# set omnifunc=syntaxcomplete#Complete
 
 set showtabline=2
 
-" Don't display chars in TTY
+# Don't display chars in TTY
 if has_key(environ(), 'DISPLAY')
-" better ascii friendly listchars
+# better ascii friendly listchars
   set listchars=lead:*,trail:*,nbsp:*,extends:>,precedes:<,tab:\|>
   set list
 endif
 
-" {{{NAVIGATION
+# {{{NAVIGATION
 
-set path+=**
+# set path+=**
 
-" Improve netrw
-let g:netrw_keepdir = 1
-let g:netrw_winsize = 25
-let g:netrw_banner = 0
-let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+' . netrw_gitignore#Hide()
-let g:netrw_hide = 1
-let g:netrw_localcopydircmdopt = ' -Rr'
-let g:netrw_localmkdiropt = ' -p'
-let g:netrw_localrmdiropt = ' -p'
-" Tree display
-let g:netrw_liststyle = 3
-let g:netrw_sizestyle = "H"
+# Improve netrw
+g:netrw_keepdir = 1
+g:netrw_winsize = 25
+g:netrw_banner = 0
+g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+' .. netrw_gitignore#Hide()
+g:netrw_hide = 1
+g:netrw_localcopydircmdopt = ' -Rr'
+g:netrw_localmkdiropt = ' -p'
+g:netrw_localrmdiropt = ' -p'
+# Tree display
+g:netrw_liststyle = 3
+g:netrw_sizestyle = "H"
 
 hi! link netrwMarkFile Search
 
-" Simply open links with `gx` through lynx in new window
-let g:netrw_browsex_viewer= "tmux new-window lynx"
+# Simply open links with `gx` through lynx in new window
+g:netrw_browsex_viewer = "tmux new-window lynx"
 
-" Open explorer in cwd
+# Open explorer in cwd
 nnoremap <leader><TAB> :Lexplore %:p:h<CR>
 
-" Add simpler bindings inside netrw
-function! NetrwMapping()
+# Add simpler bindings inside netrw
+def NetrwMapping()
   nmap <buffer> H u
   nmap <buffer> h -^
   nmap <buffer> l <CR>
@@ -132,25 +137,25 @@ function! NetrwMapping()
   nmap <buffer> L <CR>:Lexplore<CR>
   nmap <buffer> <leader><TAB> :q<CR>
   nmap <buffer> ~ :execute 'edit ' . getcwd()<CR>
-endfunction
+enddef
 
 augroup netrw_mapping
   autocmd!
-  autocmd filetype netrw call NetrwMapping()
+  autocmd filetype netrw NetrwMapping()
 augroup END
 
-" View all buffers
+# View all buffers
 nnoremap <space><space> :ls<CR> :b <space>
 
-" Use ripgrep for searching
+# Use ripgrep for searching
 if executable('rg')
   set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
 endif
 
-" Trailing space is intended
+# Trailing space is intended
 nnoremap <silent> <leader>fw :lgrep 
 
-" NAVIGATION}}}
+# NAVIGATION}}}
 
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
@@ -159,13 +164,71 @@ nnoremap <C-l> <C-w>l
 
 nnoremap <silent> <leader>x :q<CR>
 
-" Yank consistent with delete or select
+# Yank consistent with delete or select
 map Y y$
 
 au FileType gitcommit,markdown,text setlocal spell
-au FileType markdown,text set tw=0
-au FileType markdown,text noremap j gj
-au FileType markdown,text noremap k gk
+au FileType markdown,text {
+  set tw=0
+  noremap j gj
+  noremap k gk
+  inoremap <buffer> --<space> –<space>
+}
+
+# Format PHP files with phpcbf
+au FileType php set keywordprg=rdr\ https://php.net/\
+# au FileType php {
+#   set formatprg=phpcbf\ --stdin-path=%\ -
+#   set keywordprg=rdr\ https://php.net/\
+# # set makeprg=XDEBUG_MODE=off\ phpstan\ analyse\ src\ --no-progress\ --error-format=raw\ --no-interaction\ &&\ phpcs\ -q\ --report=emacs
+# }
+
+au BufWritePost *.php silent! !eval '[ -f ".git/hooks/ctags" ] && .git/hooks/ctags' &
+
+# set termguicolors
+if has_key(environ(), 'DISPLAY')
+  set background=light
+endif
+
+# only load plugins if Plug detected
+if filereadable(expand("~/.vim/autoload/plug.vim"))
+  # github.com/junegunn/vim-plug
+  plug#begin('~/.local/share/vim/plugins')
+#     Plug 'phpactor/phpactor', {'for': 'php', 'tag': '*', 'do': 'composer install --no-dev -o'}
+    Plug '~/Repos/github.com/junegunn/fzf'
+    Plug 'vim-vdebug/vdebug', {'for': 'php'}
+#     Plug 'dense-analysis/ale'
+    Plug 'junegunn/fzf.vim'
+    Plug 'Exafunction/codeium.vim'
+
+  plug#end()
+
+  nnoremap <silent> <leader>ff :FZF<CR>
+
+  g:vdebug_options = {
+    'port': 9003,
+    'path_maps': {
+      "/var/www/html": "/home/bjaskulski/Templates/WordPress",
+      "/var/www/html/wp-content/plugins/woocommerce": "/home/bjaskulski/Plugins/woocommerce"
+    },
+    'break_on_open': 0,
+    'watch_window_style': 'compact',
+  }
+
+  g:vdebug_keymap = {
+    "run": "<leader>dr",
+    "run_to_cursor": "<leader>dt",
+    "step_over": "<leader>dn",
+    "step_into": "<leader>di",
+    "step_out": "<leader>do",
+    "close": "<leader>dc",
+    "detach": "<F7>",
+    "set_breakpoint": "<F10>",
+    "get_context": "<F11>",
+    "eval_under_cursor": "<F12>",
+    "eval_visual": "<Leader>e",
+  }
+endif
 
 " Simply open links with `gx` through lynx in new window
 let g:netrw_browsex_viewer= "tmux new-window lynx"
