@@ -3,5 +3,5 @@
 # clean
 
 find -name '.git' -type d -not -path '**vendor**' -print0 2>/dev/null | \
-  xargs -r0 -n1 /bin/bash -c 'D="$(dirname "$@")"; if [[ $(git -C "$D" status --short | wc -l) -gt 1 ]]; then echo -e "\e[34mStatus of $D\e[0m"; git -C "$D" status; fi' ''
+  xargs -r0 -n1 /bin/bash -c 'D="$(dirname "$@")"; S="$(git -C "$D" status --short --branch )"; if [[ $(wc -l <<< "$S") -gt 1 ]]; then echo -e "\e[34mStatus of $D\e[0m\n$S"; fi' ''
 
