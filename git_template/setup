@@ -1,0 +1,4 @@
+#!/bin/sh
+
+mkdir -p "$HOME/.git_template/hooks"
+ln -sf "$PWD/hooks/ctags" "$HOME/.git_template/hooks/ctags"

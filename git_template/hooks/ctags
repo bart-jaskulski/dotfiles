@@ -1,0 +1,13 @@
+#!/bin/sh
+
+set -e
+PATH="/usr/local/bin:$PATH"
+trap 'rm -f "$$.tags"' EXIT
+git ls-files | \
+  ctags --tag-relative -L - -f"$$.tags" \
+  --fields=+aimlS --languages=php --kinds-PHP=+cdfint-av \
+  --exclude=*Test.php --exclude=*phpunit* \
+  --exclude=*tools* --exclude=*.phar --exclude=*vendor*
+
+mv "$$.tags" "tags"
+
