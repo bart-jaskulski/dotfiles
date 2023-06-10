@@ -230,5 +230,14 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
   }
 endif
 
-" Simply open links with `gx` through lynx in new window
-let g:netrw_browsex_viewer= "tmux new-window lynx"
+packadd lsp
+var lspServers = [
+  {
+    name: 'phpactor',
+    filetype: ['php'],
+    path: '/home/bjaskulski/bin/phpactor',
+    args: ['language-server']
+  }
+]
+
+g:LspAddServer(lspServers)
