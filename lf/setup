@@ -1,0 +1,5 @@
+#!/bin/bash
+
+rm -rf "$HOME/.config/lf"
+mkdir -p "$HOME/.config/lf"
+ln -sf "$PWD/lfrc" "$HOME/.config/lf/lfrc"
