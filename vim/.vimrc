@@ -21,6 +21,9 @@ set softtabstop=2
 # mostly used with >> and <<
 set shiftwidth=2
 
+# If folds are enabled, leave some of them closed
+set foldlevel=1
+
 # stop vim from silently messing with files that it shouldn't
 set nofixendofline
 
@@ -53,16 +56,18 @@ set ttyfast
 # don't redraw while executing macros
 set lazyredraw
 
-filetype plugin on
-
 # better command-line completion
 set wildmenu
 
 syntax on
 
-# let g:everforest_transparent_background = 2
-# let base16colorspace=256
-# colorscheme one
+if has_key(environ(), 'DISPLAY')
+  set termguicolors
+  set background=light
+else
+  set background=dark
+endif
+colorscheme one
 
 set scrolloff=8
 set clipboard=unnamed
