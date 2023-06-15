@@ -175,21 +175,6 @@ au FileType markdown,text {
   inoremap <buffer> --<space> –<space>
 }
 
-# Format PHP files with phpcbf
-au FileType php set keywordprg=rdr\ https://php.net/\
-# au FileType php {
-#   set formatprg=phpcbf\ --stdin-path=%\ -
-#   set keywordprg=rdr\ https://php.net/\
-# # set makeprg=XDEBUG_MODE=off\ phpstan\ analyse\ src\ --no-progress\ --error-format=raw\ --no-interaction\ &&\ phpcs\ -q\ --report=emacs
-# }
-
-au BufWritePost *.php silent! !eval '[ -f ".git/hooks/ctags" ] && .git/hooks/ctags' &
-
-# set termguicolors
-if has_key(environ(), 'DISPLAY')
-  set background=light
-endif
-
 # only load plugins if Plug detected
 if filereadable(expand("~/.vim/autoload/plug.vim"))
   # github.com/junegunn/vim-plug
