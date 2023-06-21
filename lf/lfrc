@@ -1,24 +1,26 @@
-# set shell sh
-# set drawbox
 set ratios '2:2'
 set ifs "\n"
 set incsearch
 set ignorecase
 set findlen 0
-# set icons
+set icons
 set shellopts '-eu'
-# set previewer pistol
-#
-set scrolloff 8
+
+set previewer ctpv
+set cleaner ctpvclear
+&ctpv -s $id
+&ctpvquit $id
+
+set scrolloff 4
 
 cmd open $ {{
 	case $(file --mime-type "$f" -bL) in
 		text/*) $EDITOR $f ;;
 		inode/*) $EDITOR $f ;;
-		audio/mpeg) mpv --really-quiet $f & disown ;;
-		video/*) setsid mpv --no-terminal $f & disown ;;
-		image/*) setsid rifle_sxiv.sh $f & disown ;;
-		application/pdf) setsid zathura $f & disown ;;
+# 		audio/mpeg) mpv --really-quiet $f & disown ;;
+# 		video/*) setsid mpv --no-terminal $f & disown ;;
+# 		image/*) setsid rifle_sxiv.sh $f & disown ;;
+# 		application/pdf) setsid zathura $f & disown ;;
         	*) for f in $f; do setsid $OPENER $f > /dev/null 2> /dev/null & done;;
 		esac
 	}}
@@ -57,28 +59,11 @@ cmd zip ${{
     rm -rf $1
 }}
 
-cmd paste &{{
-    load=$(lf -remote 'load')
-    mode=$(echo "$load" | sed -n '1p')
-    list=$(echo "$load" | sed '1d')
-    if [ $mode = 'copy' ]; then
-        rsync -av --ignore-existing --progress $list . \
-        | stdbuf -i0 -o0 -e0 tr '\r' '\n' \
-        | while read line; do
-            lf -remote "send $id echo $line"
-        done
-    elif [ $mode = 'move' ]; then
-        mv -n $list .
-    fi
-    lf -remote 'send load'
-    lf -remote 'send clear'
-}}
-
-cmd mkfile %touch "$@" 
+cmd mkfile %touch "$@"
 
 # cmd mkdir %mkdir "$(echo $* | tr ' ' '\ ')"
-# 
-#      cmd="cd"                                                       
+#
+#      cmd="cd"
 #    fi
 # lf -remote "send $id $cmd \"$res\""
 # lf -remote "send $id 'redraw'"
