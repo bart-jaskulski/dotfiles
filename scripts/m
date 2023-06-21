@@ -1,13 +1,18 @@
 #!/bin/sh
 
-declare mode="$1"
+MODE="$1"
+ROTATION="${2:-'normal'}"
+INTERNAL_MONITOR="eDP-1"
+EXTERN_MONITOR="HDMI-1"
 
-case $mode in
+case $MODE in
   on)
-    xrandr --output HDMI-1 --auto --right-of eDP-1
-    exec "$HOME/.fehbg"
+    xrandr --output "$EXTERN_MONITOR" --auto \
+      --right-of "$INTERNAL_MONITOR" \
+      --rotate "$ROTATION"
+    [ -f "$HOME/.fehbg" ] && exec "$HOME/.fehbg"
     ;;
   off)
-    xrandr --output HDMI-1 --off
+    xrandr --output "$EXTERN_MONITOR" --off
     ;;
 esac
