@@ -3,7 +3,6 @@
   name = Bart Jaskulski
   signingkey = 845132DFBE314ACF
 [core]
-  editor = vim
   excludesFile = ~/.gitignore
   autocrlf = input
 [commit]
