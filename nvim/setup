@@ -1,0 +1,4 @@
+#!/bin/sh
+
+rm -rf "$HOME/.config/nvim"
+ln -sf "$PWD/nvim" "$HOME/.config/nvim"
