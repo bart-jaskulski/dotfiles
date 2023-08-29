@@ -8,11 +8,15 @@ return {
     opts = {
       keymap = {
         fzf = {
-          ["alt-space"] = "select"
+          ["alt-space"] = "toggle",
+          ["alt-a"] = "toggle-all",
         }
       },
       buffers = {
         cwd_only = true,
+      },
+      files = {
+        fd_opts = "--color=never --type f --hidden --follow --exclude .git --exclude *.pot?"
       }
     }
   },
