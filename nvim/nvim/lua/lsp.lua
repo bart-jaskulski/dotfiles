@@ -34,10 +34,11 @@ vim.diagnostic.config({
 
 lspconfig.phpactor.setup(
   require'coq'.lsp_ensure_capabilities({
-    {
-      cmd = { 'phpactor', 'language-server' },
-      filetypes = { 'php' },
-    }
+    --cmd = {'php', '-d xdebug.mode=debug', '/home/bjaskulski/bin/phpactor', 'language-server' },
+    cmd = { '/home/bjaskulski/Repos/github.com/phpactor/phpactor/build/phpactor.phar', 'language-server' },
+    root_dir = function(fname)
+      return lspconfig.util.root_pattern('composer.json', '.git', '.phpactor.yml', '.phpactor.json')(fname)
+    end
   })
 )
 
@@ -45,6 +46,7 @@ lspconfig.phpactor.setup(
 lspconfig.volar.setup{}
 lspconfig.tsserver.setup{}
 lspconfig.gopls.setup{}
+lspconfig.clangd.setup{}
 
 lspconfig.lua_ls.setup(
   require'coq'.lsp_ensure_capabilities({

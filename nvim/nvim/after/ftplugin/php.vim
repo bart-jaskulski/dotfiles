@@ -13,6 +13,8 @@ iabbrev pubsf public static function
 iabbrev prisf private static function
 iabbrev prosf protected static function
 
+iabbrev thr throw new
+
 iabbrev __c public function __construct(
 
 iabbrev dst declare(strict_types=1);

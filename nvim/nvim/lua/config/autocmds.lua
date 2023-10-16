@@ -40,7 +40,6 @@ vim.api.nvim_create_autocmd("FileType", {
   group = augroup("wrap_spell"),
   pattern = { "gitcommit", "markdown", "text" },
   callback = function(ev)
-    vim.opt_local.textwidth = 0
     vim.opt_local.wrap = true
     vim.opt_local.spell = true
     vim.keymap.set("n", "j", "gj", { remap = true, buffer = ev.buf })
@@ -62,12 +61,14 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 })
 
 -- show cursor line only in active window
-vim.api.nvim_create_autocmd({ "InsertLeave", "BufEnter", "WinEnter" }, {
-  command = "if ! &cursorline && ! &pvw | setlocal cursorline | endif",
-})
-vim.api.nvim_create_autocmd({ "InsertEnter", "BufLeave", "WinLeave" }, {
-  command = "if &cursorline && ! &pvw | setlocal nocursorline | endif",
-})
+if os.getenv('DISPLAY') ~= nil then
+  vim.api.nvim_create_autocmd({ "InsertLeave", "BufEnter", "WinEnter" }, {
+    command = "if ! &cursorline && ! &pvw | setlocal cursorline | endif",
+  })
+  vim.api.nvim_create_autocmd({ "InsertEnter", "BufLeave", "WinLeave" }, {
+    command = "if &cursorline && ! &pvw | setlocal nocursorline | endif",
+  })
+end
 
 -- some tweaks for terminal mode
 vim.api.nvim_create_autocmd("TermOpen", {

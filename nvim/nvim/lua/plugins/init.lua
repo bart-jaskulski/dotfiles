@@ -97,7 +97,8 @@ return {
       require'github-theme'.setup {
         options = {
           ["styles.comments"] = 'italic',
-          transparent = true
+          transparent = true,
+          dim_inactive = true
         }
       }
       vim.cmd('colorscheme github_light')
@@ -175,14 +176,30 @@ return {
       )
 
       local autowrite = function()
+        if vim.g.SessionLoad ~= nil then
+          return
+        end
         if vim.v.this_session ~= '' and vim.fn.getcwd():match('Repos') then MiniSessions.write(nil, { force = true }) end
       end
       vim.api.nvim_create_autocmd(
-        'VimLeavePre',
+        -- Use BufEnter to prevent loosing data on vim fuckups
+        { 'BufEnter', 'VimLeavePre' },
         { group = augroup, callback = autowrite, desc = 'Autowrite current session' }
       )
     end
   },
+  {
+    'echasnovski/mini.hipatterns',
+    event = "BufReadPre",
+    opts = function()
+      local hi = require("mini.hipatterns")
+      return {
+        highlighters = {
+          hex_color = hi.gen_highlighter.hex_color(),
+        },
+      }
+    end,
+  }
 --   { 'stevearc/dressing.nvim' },
 --   {
 --     "nvim-lualine/lualine.nvim",

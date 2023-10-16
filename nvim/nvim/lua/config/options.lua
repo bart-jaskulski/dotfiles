@@ -39,7 +39,7 @@ vim.opt.fixendofline = false
 -- set noswapfile
 -- vim.opt.directory='~/.vimswap'
 
-vim.opt.textwidth=72
+vim.opt.textwidth=100
 vim.opt.formatoptions='cq1lmMjp'
 
 -- Avoid hit enter to continue
@@ -108,8 +108,6 @@ vim.opt.path:prepend { 'src/**', 'assets/**' }
 -- Display status line only for the last window
 vim.opt.laststatus = 2
 vim.opt.cmdheight = 1
--- vim.opt.statusline = "%!v:lua.require'statusline'.run()"
--- vim.opt.statusline = "%F %y %=%l:%c %p%%"
 
 if os.getenv('DISPLAY') ~= nil then
   vim.opt.termguicolors = true
@@ -126,6 +124,7 @@ if os.getenv('DISPLAY') ~= nil then
   vim.opt.winblend=10
 else
   vim.opt.background = 'dark'
+  vim.opt.cursorline = false
 end
 
 -- Use ripgrep for searching
