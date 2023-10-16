@@ -15,10 +15,12 @@ export GPG_TTY=$(tty)
 export REPOS="$HOME/Repos"
 export CLICOLOR=1
 export LSCOLORS=ExFxBxDxCxegedabagacad
-export TERM=xterm-256color
+export TERM=tmux-256color
 export EDITOR=nvim
 export VISUAL=nvim
 export GITLAB_HOST='https://gitlab.wpdesk.dev'
+export GLAMOUR_STYLE=light
+export BAT_THEME="ansi"
 export LESS="-FXR"
 export LESS_TERMCAP_mb=$'\e[1;32m'
 export LESS_TERMCAP_md=$'\e[1;32m'
@@ -29,6 +31,16 @@ export LESS_TERMCAP_ue=$'\e[0m'
 export LESS_TERMCAP_us=$'\e[1;4;31m'
 export PNPM_HOME="$HOME/.local/share/pnpm"
 # export DOCKER_HOST=unix:///run/user/1000/podman/podman.sock
+
+# ----------------------------- dircolors ----------------------------
+
+if _have dircolors; then
+  if [[ -r "$HOME/.dircolors" ]]; then
+    eval "$(dircolors -b "$HOME/.dircolors")"
+  else
+    eval "$(dircolors -b)"
+  fi
+fi
 
 #----------------- path ------------------------
 
@@ -41,7 +53,7 @@ pathappend() {
     PATH=${PATH/%":$arg"/}
     export PATH="${PATH:+"$PATH:"}$arg"
   done
-} && export pathappend
+} && export -f pathappend
 
 pathprepend() {
   for arg in "$@"; do
@@ -51,7 +63,7 @@ pathprepend() {
     PATH=${PATH/%":$arg"/}
     export PATH="$arg${PATH:+":${PATH}"}"
   done
-} && export pathprepend
+} && export -f pathprepend
 
 pathprepend "$HOME/Scripts"
 
@@ -116,7 +128,7 @@ __ps1() {
   fi;
 
   changes_count=$(git status --porcelain 2>/dev/null | awk '{a[$1]++} END {for (pair in a) {printf("%s %d%s", pair, a[pair], (++i==length(a))?ORS:", ")}}')
-  last_commit=$(git log -1 --format=%cd --date=format:%d.%m.%g 2>/dev/null || echo 0)
+  last_commit=$(git log -1 --format=%cd --date=format:%d.%m.%g 2>/dev/null)
 
   B=$(git branch --show-current 2>/dev/null);
   [[ $dir = "$B" ]] && B=.;
@@ -168,7 +180,8 @@ if ! shopt -oq posix; then
 fi
 
 _have gh && . <(gh completion -s bash)
-_have composer && . <(composer completion)
+# This is extremely slow
+# _have composer && . <(composer completion)
 _have glab && . <(glab completion)
 
 # export NVM_DIR="$HOME/.nvm"
