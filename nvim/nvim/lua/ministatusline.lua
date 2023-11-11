@@ -180,7 +180,7 @@ end
 ---@return __statusline_section
 MiniStatusline.section_filename = function()
   -- In terminal always use plain name
-  if vim.bo.buftype == 'terminal' then
+  if vim.bo.buftype == 'terminal' or vim.bo.buftype == 'quickfix' then
     return '%t'
   end
 

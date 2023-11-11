@@ -1,7 +1,6 @@
 local gs = require('gitsigns')
 gs.setup{
   on_attach = function(bufnr)
-    
     -- Navigation
     vim.keymap.set('n', ']g', function()
       if vim.wo.diff then return ']g' end
