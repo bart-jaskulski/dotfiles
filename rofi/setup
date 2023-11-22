@@ -1,6 +1,0 @@
-#!/bin/sh
-
-rm -rf "$HOME/.config/rofi"
-mkdir -p "$HOME/.config/rofi"
-ln -sf "$PWD/config.rasi" "$HOME/.config/rofi/"
-ln -sf "$PWD/themes" "$HOME/.config/rofi/"
