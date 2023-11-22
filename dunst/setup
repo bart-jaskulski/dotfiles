@@ -1,5 +1,0 @@
-#!/bin/sh
-
-rm -rf "$HOME/.config/dunst"
-mkdir -p "$HOME/.config/dunst"
-ln -sf "$PWD/dunstrc" "$HOME/.config/dunst/dunstrc"
