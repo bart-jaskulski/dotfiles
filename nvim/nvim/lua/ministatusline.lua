@@ -48,7 +48,6 @@ MiniStatusline.config = {
 MiniStatusline.active = function()
   -- stylua: ignore start
   local mode, mode_hl = MiniStatusline.section_mode()
-  local git           = MiniStatusline.section_git()
   local location      = MiniStatusline.section_location()
   local filename      = MiniStatusline.section_filename()
   local search        = MiniStatusline.section_searchcount({ trunc_width = 75 })
@@ -58,7 +57,6 @@ MiniStatusline.active = function()
   -- sections, etc.)
   return MiniStatusline.combine_groups({
     { hl = mode_hl,                  strings = { mode } },
-    { hl = 'MiniStatuslineDevinfo',  strings = { git } },
     '%<', -- Mark general truncate point
     { hl = 'MiniStatuslineFilename', strings = { filename } },
     '%=', -- End left alignment
@@ -149,25 +147,6 @@ MiniStatusline.section_mode = function()
   local mode_info = H.modes[vim.fn.mode()]
 
   return mode_info.short, mode_info.hl
-end
-
---- Section for Git information
----
---- Normal output contains name of `HEAD` (via |b:gitsigns_head|) and chunk
---- information (via |b:gitsigns_status|). Short output - only name of `HEAD`.
---- Note: requires 'lewis6991/gitsigns' plugin.
----
---- Short output is returned if window width is lower than `args.trunc_width`.
----
----@return __statusline_section
-MiniStatusline.section_git = function()
-  if H.isnt_normal_buffer() then return '' end
-
-  local signs = vim.b.gitsigns_status or ''
-
-  if signs == '' then return '' end
-
-  return string.format('%s %s', '', signs)
 end
 
 --- Section for file name
