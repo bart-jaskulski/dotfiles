@@ -135,7 +135,8 @@ mode "move" {
 }
 
 bar {
-  status_command i3status
+  status_command slstatus -s
+#  status_command i3status
   padding 0 4px
   font pango:iAWriterMonoS 9
   separator_symbol " "
