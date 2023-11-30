@@ -1,7 +1,0 @@
-#!/bin/bash
-
-yad --calendar \
-		--undecorated --fixed \
-		--posy=-48 --posx=-8 --no-buttons --borders=0 \
-		--title="yad-calendar" \
-		&> /dev/null && disown

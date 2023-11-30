@@ -1,3 +1,0 @@
-#!/bin/bash
-
-exec notify-send -t 2500 -u low "$(mpc --format '%title%\n%artist%' current)"

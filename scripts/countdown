@@ -1,6 +1,0 @@
-#!/bin/bash
-
-COUNTDOWN="$1"
-NOTIFICATION="$2"
-
-sleep "$COUNTDOWN" && notify-send "$NOTIFICATION"
