@@ -1,0 +1,9 @@
+set download-timeout 10
+set scrolloff 10
+set open-in-browser-command 'lynx "%l"'
+set initial-unread-first-sorting true
+set items-count-limit 100
+
+set color-list-item-unread-fg green
+set color-list-section-unread-fg green
+set color-list-feed-unread-fg green
