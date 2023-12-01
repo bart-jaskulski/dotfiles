@@ -55,4 +55,3 @@
   pl = pull
   st = stash push
   sw = switch
-  ctags = !.git/hooks/ctags
