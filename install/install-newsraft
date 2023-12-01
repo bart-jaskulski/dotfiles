@@ -1,0 +1,14 @@
+#!/bin/sh
+
+# Dependencies
+apt install build-essential libcurl-dev libexpat-dev libgumbo-dev libncurses-dev libsqlite3-dev libyajl-dev
+
+dir="$(mktemp -d)"
+
+cleanup() {
+  rm -rf "$dir"
+}
+trap cleanup EXIT
+
+git clone https://codeberg.org/newsraft/newsraft.git "$dir"
+make -C "$dir" install
