@@ -1,0 +1,14 @@
+XF86Audio{Play,Prev,Next}
+	spt pb {--toggle,--previous,--next}
+
+XF86AudioMute
+  pactl set-sink-mute @DEFAULT_SINK@ toggle; kill -10 $(pidof slstatus)
+
+XF86Audio{Raise,Lower}Volume
+	pactl set-sink-volume @DEFAULT_SINK@ {+,-}10%; kill -10 $(pidof slstatus)
+
+@Print
+	scrr
+
+F{8,9,10}
+	{firefox,dmenu_run,st}

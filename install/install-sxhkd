@@ -1,0 +1,11 @@
+#!/bin/sh
+
+dir="$(mktemp -d)"
+
+cleanup() {
+  rm -rf "$dir"
+}
+trap cleanup EXIT
+
+git clone https://github.com/baskerville/sxhkd.git "$dir"
+make -C "$dir" all install
