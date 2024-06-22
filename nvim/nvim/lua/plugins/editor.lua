@@ -58,17 +58,22 @@ return {
         }
       },
       buffers = { cwd_only = true, },
-      files = {
-        fd_opts = "--color=never --type f --hidden --follow --exclude .git --exclude *.pot?"
-      }
+      grep = { multiline = 1 },
     }
   },
   {
-    'lewis6991/gitsigns.nvim',
+    'echasnovski/mini.diff',
     event = { "BufReadPost", "BufNewFile", "BufWritePre" },
-    config = function()
-      require 'git'
-    end
+    opts = {
+      view = {
+        style = 'sign',
+        signs = {
+          add    =  '┃',
+          delete =  '_',
+          change =  '~',
+        }
+      },
+    },
   },
   {
     'echasnovski/mini.jump',
